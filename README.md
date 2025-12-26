@@ -4,12 +4,15 @@
 
 ### A powerful command-line accounting ledger application built with Kotlin
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FBaneeishaque%2FAccount-Ledger-Cli-Kotlin.git)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin)
+<!-- START_BADGES -->
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org) [![Gradle](https://img.shields.io/badge/Gradle-8.14.3-02303a.svg?style=flat&logo=gradle)](https://gradle.org) [![JVM](https://img.shields.io/badge/JVM-21-orange.svg?style=flat&logo=java)](https://openjdk.org)
 
-![GitHub Actions](https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin/workflows/Java%20CI%20with%20Gradle/badge.svg)
-[![codecov](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin)
-[![CodeFactor](https://www.codefactor.io/repository/github/baneeishaque/account-ledger-cli-kotlin/badge)](https://www.codefactor.io/repository/github/baneeishaque/account-ledger-cli-kotlin)
+[![GitHub Actions](https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin/actions) [![codecov](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin/branch/master/graph/badge.svg)](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin) [![CodeFactor](https://www.codefactor.io/repository/github/baneeishaque/account-ledger-cli-kotlin/badge)](https://www.codefactor.io/repository/github/baneeishaque/account-ledger-cli-kotlin)
+
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FBaneeishaque%2FAccount-Ledger-Cli-Kotlin.git) [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin)
+<!-- END_BADGES -->
 
 </div>
 
@@ -32,15 +35,17 @@
 - [CI/CD Pipelines](#-cicd-pipelines)
 - [Project Structure](#-project-structure)
 - [Contributing](#-contributing)
-- [Development Guidelines](#-development-guidelines)
+- [Development Flow & Guidelines](#-development-flow--guidelines)
 - [Testing](#-testing)
 - [Troubleshooting](#-troubleshooting)
+- [Code Quality](#-code-quality)
+- [Acknowledgments](#-acknowledgments)
 
 ---
 
 ## 🔍 Overview
 
-**Account Ledger CLI** is a comprehensive command-line accounting application designed for personal and small business financial management. Built entirely in Kotlin, it provides a robust, type-safe, and coroutine-powered solution for managing financial transactions, generating balance sheets, and maintaining ledger records.
+**<!-- START_DESCRIPTION -->Highly performant, type-safe command-line accounting ledger built with Kotlin & GraalVM, featuring hierarchical account management, automated balance sheet generation, and GitHub Gist synchronization.<!-- END_DESCRIPTION -->** This application is designed for both personal and small business financial management, providing a robust, coroutine-powered solution for maintaining ledger records.
 
 The application connects to a remote API server for data persistence and supports various transaction types including normal transactions, via-transactions, two-way transactions, and specialized transaction types for cashback and coins-based rewards systems.
 
@@ -451,68 +456,52 @@ Build a native executable for faster startup times and reduced memory footprint.
 
 ### Prerequisites
 
-1. Install GraalVM 21 with Native Image:
-```bash
-# Using SDKMAN
-sdk install java 21.0.2-graal
+1.  **Install GraalVM 21** with Native Image using `mise`:
+    ```bash
+    mise install java@graalvm-21
+    ```
+2.  **Install Native Image component**:
+    ```bash
+    gu install native-image
+    ```
 
-# Or using mise
-mise install java@graalvm-21
-```
-
-2. Install Native Image component:
-```bash
-gu install native-image
-```
-
-### Build Native Image
-
-The project includes a `dynamic-proxies.json` file in the project root that contains the dynamic proxy configuration required for native image compilation. This file configures the reflection needed for API client classes (specifically `accountLedgerCli.api.Api`).
+### Build & Run
 
 ```bash
-# First, build the JAR
+# 1. Build the JAR
 ./gradlew :cli-app:jar
 
-# Build native image (run from project root directory)
-native-image \
-  --static \
-  --no-fallback \
-  --allow-incomplete-classpath \
-  -H:+AddAllCharsets \
-  -H:EnableURLProtocols=http,https \
+# 2. Build native image (run from project root)
+native-image --static --no-fallback --allow-incomplete-classpath \
+  -H:+AddAllCharsets -H:EnableURLProtocols=http,https \
   -H:DynamicProxyConfigurationFiles="dynamic-proxies.json" \
   -H:+ReportExceptionStackTraces \
   -jar cli-app/build/libs/cli-app.jar \
   AccountLedgerCli.bin
-```
 
-> **Note:** The `dynamic-proxies.json` file is located in the project root and contains the dynamic proxy configuration needed for API client classes. Make sure to run the command from the project root directory.
-
-### Run Native Binary
-
-```bash
+# 3. Run native binary
 ./AccountLedgerCli.bin
 ```
 
-### Build Options
+> **Note:** Native image compilation requires reflection configuration for API client classes (specifically `accountLedgerCli.api.Api`), provided in `dynamic-proxies.json`. **Make sure to run the build command from the project root directory.**
+
+### Build Options Reference
 
 | Option | Description |
 |--------|-------------|
 | `--static` | Create a statically linked executable |
 | `--no-fallback` | Fail if native image can't be built |
+| `--allow-incomplete-classpath` | Allow image building with an incomplete classpath |
 | `-H:+AddAllCharsets` | Include all character sets |
 | `-H:EnableURLProtocols` | Enable HTTP/HTTPS protocols |
-| `-H:DynamicProxyConfigurationFiles` | Specify dynamic proxy configuration (uses project's dynamic-proxies.json) |
+| `-H:DynamicProxyConfigurationFiles` | Specify dynamic proxy configuration (uses `dynamic-proxies.json`) |
+| `-H:+ReportExceptionStackTraces` | Report stack traces for exceptions during image building |
 
 ---
 
 ## ☁ Cloud Development Environments
 
 ### Gitpod
-
-Click the button below to open the project in Gitpod:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Baneeishaque/Account-Ledger-Cli-Kotlin)
 
 The `.gitpod.yml` configuration provides:
 - Pre-configured VNC desktop environment
@@ -522,15 +511,33 @@ The `.gitpod.yml` configuration provides:
 
 ### Google Cloud Shell
 
-[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://ssh.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2FBaneeishaque%2FAccount-Ledger-Cli-Kotlin.git)
+Launch a pre-configured environment with Google Cloud Shell directly from the header badge.
+
+---
+
+---
+
+## 🏷️ GitHub Topics
+
+<!-- START_METADATA -->
+| Category | Topics |
+| :--- | :--- |
+| **Financial Core** | `accounting` `ledger` `finance` `double-entry` `personal-finance` `money-management` `fintech` `bookkeeping` |
+| **Interface & UX** | `cli` `command-line-interface` `interactive-terminal` `terminal-app` `user-experience` |
+| **Technical Stack** | `kotlin` `graalvm` `native-image` `jvm` `kotlin-native` `kotlin-multiplatform` `gradle` `multimodule-gradle` |
+| **Logic & Data** | `type-safe` `coroutine-powered` `ktor-client` `kotlinx-serialization` `json-serialization` `logback` `gist-synchronization` |
+| **Development** | `open-source` `developer-tools` `productivity` `unit-testing` `ci-cd` `github-actions` `test-coverage` |
+
+<!-- END_METADATA -->
 
 ---
 
 ## 🔄 CI/CD Pipelines
 
-### GitHub Actions
+Automated builds, tests, and distributions are performed across multiple platforms:
 
-The project uses GitHub Actions for continuous integration:
+### GitHub Actions
+The primary CI for Linux (Ubuntu) using Oracle JDK 21. It runs on every push and PR to the `master` branch.
 
 ```yaml
 # .github/workflows/gradle.yml
@@ -541,16 +548,15 @@ The project uses GitHub Actions for continuous integration:
 ```
 
 ### Azure Pipelines
-
-Windows builds are configured via `azure-pipelines-windows.yml`:
-- Gradle caching for faster builds
-- TAR distribution creation
-- Artifact publishing
+Windows builds are configured via `azure-pipelines-windows.yml` to ensure cross-platform compatibility:
+- **Gradle Caching**: Optimized for faster subsequent builds.
+- **Distributions**: Automatically creates TAR and ZIP distributions.
+- **Artifacts**: Publishes build artifacts for release management.
 
 ### Travis CI
-
-Legacy CI configuration in `.travis.yml`:
-- Codecov integration for coverage reporting
+Legacy CI configuration in `.travis.yml` primarily used for:
+- **Codecov Integration**: Detailed test coverage reporting.
+- **Cross-platform verification**: Ensuring stability across diverse environments.
 
 ---
 
@@ -629,7 +635,7 @@ git push origin feature/your-feature-name
 
 ### Commit Message Convention
 
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
+Follow [Conventional Commits](https://www.conventionalcommits.org/) to ensure clear project history:
 
 | Type | Description |
 |------|-------------|
@@ -641,7 +647,7 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 | `test` | Adding or updating tests |
 | `chore` | Maintenance tasks |
 
-Example:
+**Example**:
 ```
 feat: add support for CSV transaction import
 fix: resolve date parsing issue in transaction view
@@ -650,50 +656,41 @@ docs: update installation instructions
 
 ### Pull Request Guidelines
 
-- Ensure all tests pass
-- Update documentation if needed
-- Keep changes focused and atomic
-- Provide a clear description of changes
+To ensure high code quality, please follow these guidelines for all PRs:
+- **Test Coverage**: Ensure all new logic is covered by tests and existing tests pass.
+- **Documentation**: Update `README.md` or KDoc as necessary.
+- **Atomic Commits**: Keep changes focused and split large updates into smaller, logical PRs.
+- **Description**: Provide a clear summary of *why* the change is being made and any potential side effects.
 
 ---
 
-## 💻 Development Guidelines
+## 💻 Development Flow & Guidelines
 
 ### Code Style
 
-- Follow [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html)
-- Use meaningful variable and function names
-- Add KDoc comments for public APIs
-- Keep functions focused and small
+Maintain consistency by following these standards:
+- **Conventions**: Follow [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html).
+- **Naming**: Use meaningful variable and function names.
+- **Documentation**: Use KDoc for all public APIs.
+- **Focus**: Keep functions small and focused on a single responsibility.
 
 ### IDE Setup
+- **IntelliJ IDEA (Recommended)**: 
+    1. Import as a Gradle project.
+    2. Ensure the **Kotlin plugin** is enabled.
+    3. Set the **Project SDK** to JDK 21.
+- **VS Code**: Required extensions:
+    - Kotlin Language
+    - Gradle for Java
 
-**Recommended: IntelliJ IDEA**
+### Gradle & Performance
+The project uses **Gradle Kotlin DSL** with **Version Catalogs** for centralized dependency management.
 
-1. Open the project in IntelliJ IDEA
-2. Import as Gradle project
-3. Enable Kotlin plugin
-4. Set Project SDK to JDK 21
+- `gradle/libs.versions.toml`: Centralized dependency versions.
+- `build.gradle.kts`: Root-level project configuration.
+- `cli-app/build.gradle.kts`: Application-specific logic.
 
-**VS Code**
-
-Required extensions:
-- Kotlin Language
-- Gradle for Java
-
-### Gradle Configuration
-
-The project uses Gradle Kotlin DSL with version catalogs:
-
-```kotlin
-// gradle/libs.versions.toml - Centralized dependency versions
-// build.gradle.kts - Root configuration
-// cli-app/build.gradle.kts - Module configuration
-```
-
-### Performance Settings
-
-`gradle.properties` contains optimized settings:
+Optimized performance settings are configured in `gradle.properties`:
 ```properties
 org.gradle.vfs.watch=true
 org.gradle.unsafe.configuration-cache=true
@@ -708,29 +705,29 @@ kotlin.compiler.preciseCompilationResultsBackup=true
 ### Running Tests
 
 ```bash
-# Run all tests
+# Run all tests across modules
 ./gradlew test
 
-# Run tests with coverage
+# Run tests with coverage reporting
 ./gradlew test jacocoTestReport
 
-# Run specific module tests
+# Run tests for a specific module
 ./gradlew :cli-app:test
 ```
 
 ### Test Coverage
 
-JaCoCo is configured for test coverage reporting:
+JaCoCo is configured for integrated coverage reporting:
 
 ```bash
-# Generate coverage report
+# Generate HTML report
 ./gradlew jacocoTestReport
 
-# View report
-open cli-app/build/reports/jacoco/test/html/index.html
+# View report locally
+# Path: cli-app/build/reports/jacoco/test/html/index.html
 ```
 
-Coverage reports are automatically uploaded to [Codecov](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin).
+Coverage is automatically synchronized with [Codecov](https://codecov.io/gh/Baneeishaque/Account-Ledger-Cli-Kotlin) for every pull request.
 
 ### Writing Tests
 
