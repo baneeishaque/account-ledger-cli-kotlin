@@ -1,0 +1,100 @@
+name: Sync Repository Metadata
+
+on:
+  push:
+    paths:
+      - 'README.md'
+  workflow_dispatch:
+
+jobs:
+  sync-metadata:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      repository-projects: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync Metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - << 'EOF'
+          import os
+          import subprocess
+          import re
+          import json
+
+          def run_command(cmd):
+              result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+              return result.returncode, result.stdout, result.stderr
+
+          def sync():
+              # 1. Parse README.md
+              if not os.path.exists('README.md'):
+                  print("Error: README.md not found.")
+                  exit(1)
+                  
+              with open('README.md', 'r') as f:
+                  content = f.read()
+              
+              # 2. Extract Description (Between Markers)
+              desc_match = re.search(r'<!-- START_DESCRIPTION -->(.*?)<!-- END_DESCRIPTION -->', content, re.DOTALL)
+              description = desc_match.group(1).strip() if desc_match else ""
+              # Strip Markdown syntax for clean repository description
+              description = re.sub(r'[*_#`]', '', description)
+              
+              # 3. Extract Ranked Topics from Metadata Table
+              # Logic: Parse the table between markers, collecting topics Top-to-Bottom, Left-to-Right.
+              metadata_match = re.search(r'<!-- START_METADATA -->.*?\|.*?\n\|.*?\n(.*?)\n\s*<!-- END_METADATA -->', content, re.DOTALL)
+              topics = []
+              if metadata_match:
+                  table_body = metadata_match.group(1)
+                  rows = table_body.strip().split('\n')
+                  for row in rows:
+                      if '|' in row:
+                          cells = row.split('|')
+                          if len(cells) >= 3:
+                              # Second column contains topics list
+                              topic_cell = cells[2]
+                              found = re.findall(r'`([^`]+)`', topic_cell)
+                              topics.extend([t.strip().lower() for t in found])
+
+              # 4. Filter & Prioritize (Top 20 for SEO & Visibility)
+              # The first 20 topics discovered are synced to GitHub's searchable metadata.
+              primary_topics = [t for t in topics if t][:20]
+              
+              print(f"Syncing description: {description}")
+              print(f"Syncing Top 20 ranked topics: {primary_topics}")
+              
+              if not primary_topics and not description:
+                  print("Nothing to sync.")
+                  return
+
+              # 5. Sync via GitHub Settings (Primary: CLI, Secondary: REST API)
+              # We use a PUT call via the API as the primary for exact synchronization (replaces instead of adds).
+              api_url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/topics"
+              topics_json = json.dumps({"names": primary_topics})
+              rc_api, out_api, err_api = run_command(
+                  f'curl -L -X PUT -H "Accept: application/vnd.github+json" '
+                  f'-H "Authorization: Bearer {os.environ["GH_TOKEN"]}" '
+                  f'{api_url} -d \'{topics_json}\''
+              )
+              
+              # Also sync description via API
+              desc_url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}"
+              desc_json = json.dumps({"description": description})
+              run_command(
+                  f'curl -L -X PATCH -H "Accept: application/vnd.github+json" '
+                  f'-H "Authorization: Bearer {os.environ["GH_TOKEN"]}" '
+                  f'{desc_url} -d \'{desc_json}\''
+              )
+              
+              if rc_api != 0:
+                  print(f"Fatal: Metadata sync failed: {err_api.strip()}")
+                  exit(1)
+              print("Sync successful.")
+
+          sync()
+          EOF
