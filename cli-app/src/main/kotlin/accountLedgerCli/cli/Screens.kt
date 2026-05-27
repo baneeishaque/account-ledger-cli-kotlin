@@ -1465,6 +1465,8 @@ object Screens {
                         )
                     }",
                     "32 - Add Child ${ConstantsNative.ACCOUNT_TEXT}",
+                    "33 - Edit ${ConstantsNative.ACCOUNT_TEXT}",
+                    "34 - Delete ${ConstantsNative.ACCOUNT_TEXT}",
                     "0 - Back",
                     "",
                     "Enter Your Choice : "
@@ -2060,6 +2062,23 @@ object Screens {
                         parentAccount = fromAccount,
                         isDevelopmentMode = isDevelopmentMode
                     )
+                }
+
+                "33" -> {
+
+                    editAccountInteractive(
+                        account = fromAccount,
+                        isDevelopmentMode = isDevelopmentMode
+                    )
+                }
+
+                "34" -> {
+
+                    deleteAccountInteractive(
+                        account = fromAccount,
+                        isDevelopmentMode = isDevelopmentMode
+                    )
+                    return localInsertTransactionResult
                 }
 
                 "0" -> {

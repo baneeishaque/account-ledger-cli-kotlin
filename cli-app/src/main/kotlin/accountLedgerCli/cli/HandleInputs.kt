@@ -208,3 +208,91 @@ internal fun addAccountInteractive(
         println("Add Account operation did not complete.")
     }
 }
+
+
+internal fun editAccountInteractive(
+
+    account: AccountResponse,
+    isDevelopmentMode: Boolean
+
+) {
+    println("Editing Account [${account.fullName}] (press Enter to keep current value)")
+
+    print("Account Name [${account.name}] : ")
+    val name: String = readln().trim().ifEmpty { account.name }
+
+    val currentNotes: String = account.notes ?: ""
+    print("Notes [${currentNotes}] : ")
+    val notes: String = readln().trim().ifEmpty { currentNotes }
+
+    print("Account Type [${account.accountType}] : ")
+    val accountType: String = readln().trim().ifEmpty { account.accountType }
+
+    print("Commodity Type [${account.commodityType}] : ")
+    val commodityType: String = readln().trim().ifEmpty { account.commodityType }
+
+    print("Commodity Value [${account.commodityValue}] : ")
+    val commodityValue: String = readln().trim().ifEmpty { account.commodityValue }
+
+    val currentTaxable: Boolean = account.taxable.equals(other = "T", ignoreCase = true)
+    print("Taxable (y/N) [${if (currentTaxable) "Y" else "N"}] : ")
+    val taxableInput: String = readln().trim()
+    val taxable: Boolean = if (taxableInput.isEmpty()) currentTaxable else taxableInput.equals(other = "y", ignoreCase = true)
+
+    val currentPlaceHolder: Boolean = account.placeHolder.equals(other = "T", ignoreCase = true)
+    print("Place Holder (y/N) [${if (currentPlaceHolder) "Y" else "N"}] : ")
+    val placeHolderInput: String = readln().trim()
+    val placeHolder: Boolean = if (placeHolderInput.isEmpty()) currentPlaceHolder else placeHolderInput.equals(other = "y", ignoreCase = true)
+
+    val parentFullName: String = account.fullName.substringBeforeLast(delimiter = ":", missingDelimiterValue = "")
+    val fullName: String = if (parentFullName.isEmpty()) name else "$parentFullName:$name"
+
+    val isOk: Boolean = InsertOperations.updateAccount(
+
+        accountId = account.id,
+        fullName = fullName,
+        name = name,
+        parentAccountId = account.parentAccountId,
+        accountType = accountType,
+        notes = notes,
+        commodityType = commodityType,
+        commodityValue = commodityValue,
+        taxable = taxable,
+        placeHolder = placeHolder,
+        isDevelopmentMode = isDevelopmentMode,
+        accountManipulationSuccessActions = { println("Account [$fullName] updated.") },
+        accountManipulationFailureActions = { error: String -> println("Failed to update account : $error") }
+    )
+    if (!isOk) {
+
+        println("Edit Account operation did not complete.")
+    }
+}
+
+internal fun deleteAccountInteractive(
+
+    account: AccountResponse,
+    isDevelopmentMode: Boolean
+
+) {
+    println("About to delete Account [${account.fullName}] (id=${account.id}).")
+    print("Are you sure? (y/N) : ")
+    val confirm: String = readln().trim()
+    if (!confirm.equals(other = "y", ignoreCase = true)) {
+
+        println("Delete cancelled.")
+        return
+    }
+
+    val isOk: Boolean = InsertOperations.deleteAccount(
+
+        accountId = account.id,
+        isDevelopmentMode = isDevelopmentMode,
+        accountManipulationSuccessActions = { println("Account [${account.fullName}] deleted.") },
+        accountManipulationFailureActions = { error: String -> println("Failed to delete account : $error") }
+    )
+    if (!isOk) {
+
+        println("Delete Account operation did not complete.")
+    }
+}
