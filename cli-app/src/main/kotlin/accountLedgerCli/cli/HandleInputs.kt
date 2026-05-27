@@ -4,10 +4,10 @@ import account.ledger.library.api.response.AccountResponse
 import account_ledger_library.constants.ConstantsNative
 import account.ledger.library.models.InsertTransactionResult
 import account.ledger.library.models.ViewTransactionsOutput
+import account.ledger.library.operations.InsertOperations
 import account.ledger.library.utils.AccountUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import common.utils.library.utils.ListUtilsInteractive
-import common.utils.library.utils.ToDoUtilsInteractive
 import io.github.cdimascio.dotenv.Dotenv
 
 fun processChildAccountScreenInput(
@@ -87,7 +87,11 @@ fun processChildAccountScreenInput(
 
         "3" -> {
 
-            ToDoUtilsInteractive.showTodo()
+            addAccountInteractive(
+                userId = userId,
+                parentAccount = fromAccount,
+                isDevelopmentMode = isDevelopmentMode
+            )
             return ViewTransactionsOutput(output = "3", addTransactionResult = accountHomeOutput)
         }
 
@@ -145,4 +149,62 @@ private fun handleAccountSelection(
         viaAccount = viaAccount,
         toAccount = toAccount
     )
+}
+
+
+private fun addAccountInteractive(
+
+    userId: UInt,
+    parentAccount: AccountResponse,
+    isDevelopmentMode: Boolean
+
+) {
+    print("Account Name : ")
+    val name: String = readln().trim()
+    if (name.isEmpty()) {
+
+        println("A/C Name cannot be empty.")
+        return
+    }
+
+    print("Notes (optional) : ")
+    val notes: String = readln().trim()
+
+    print("Account Type [GROUP] : ")
+    val accountType: String = readln().trim().ifEmpty { "GROUP" }
+
+    print("Commodity Type [CURRENCY] : ")
+    val commodityType: String = readln().trim().ifEmpty { "CURRENCY" }
+
+    print("Commodity Value [INR] : ")
+    val commodityValue: String = readln().trim().ifEmpty { "INR" }
+
+    print("Taxable (y/N) : ")
+    val taxable: Boolean = readln().trim().equals(other = "y", ignoreCase = true)
+
+    print("Place Holder (y/N) : ")
+    val placeHolder: Boolean = readln().trim().equals(other = "y", ignoreCase = true)
+
+    val fullName: String = "${parentAccount.fullName}:$name"
+
+    val isOk: Boolean = InsertOperations.insertAccount(
+
+        fullName = fullName,
+        name = name,
+        parentAccountId = parentAccount.id,
+        accountType = accountType,
+        notes = notes,
+        commodityType = commodityType,
+        commodityValue = commodityValue,
+        ownerId = userId,
+        taxable = taxable,
+        placeHolder = placeHolder,
+        isDevelopmentMode = isDevelopmentMode,
+        accountManipulationSuccessActions = { println("Account [$fullName] created.") },
+        accountManipulationFailureActions = { error: String -> println("Failed to create account : $error") }
+    )
+    if (!isOk) {
+
+        println("Add Account operation did not complete.")
+    }
 }
