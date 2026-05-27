@@ -152,7 +152,7 @@ private fun handleAccountSelection(
 }
 
 
-private fun addAccountInteractive(
+internal fun addAccountInteractive(
 
     userId: UInt,
     parentAccount: AccountResponse,

@@ -1464,6 +1464,7 @@ object Screens {
                             dotEnv = dotEnv
                         )
                     }",
+                    "32 - Add Child ${ConstantsNative.ACCOUNT_TEXT}",
                     "0 - Back",
                     "",
                     "Enter Your Choice : "
@@ -2049,6 +2050,15 @@ object Screens {
                         previousTransactionData = localInsertTransactionResult,
                         isDevelopmentMode = isDevelopmentMode,
                         dotEnv = dotEnv
+                    )
+                }
+
+                "32" -> {
+
+                    addAccountInteractive(
+                        userId = userId,
+                        parentAccount = fromAccount,
+                        isDevelopmentMode = isDevelopmentMode
                     )
                 }
 
