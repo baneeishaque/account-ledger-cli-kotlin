@@ -68,7 +68,8 @@
 				"vscode.git-base",
 				"vscode.git",
 				"vscode.configuration-editing",
-				"github.copilot-chat"
+				"github.copilot-chat",
+				"vscode.log"
 				// "github.vscode-pull-request-github",
 				// "ms-vscode-remote.remote-containers",
 				// "nick-rudenko.back-n-forth",
