@@ -46,6 +46,23 @@ Some extensions are commented out; enable them by uncommenting the entries in th
 2. Run **Dev Containers: Reopen in Container** from the command palette.
 3. Wait for `postCreateCommand` to finish installing the Java toolchain via mise.
 
+## CI Validation
+
+The dev container definition is validated by the [`Test Dev Container`](../.github/workflows/devcontainer-test.yml) GitHub Actions workflow.
+
+| Property | Value |
+|---|---|
+| Workflow | `.github/workflows/devcontainer-test.yml` |
+| Triggers | `push` / `pull_request` touching `.devcontainer/devcontainer.json` |
+| Runner | `ubuntu-latest` |
+| Job | `test-devcontainer` |
+
+The job installs the [Dev Containers CLI](https://github.com/devcontainers/cli) (`@devcontainers/cli`) and runs `devcontainer build --workspace-folder .`, which fails if the container image or features cannot be built.
+
+A commented-out step is available for smoke-testing tools inside the built container via `devcontainer exec` (for example `sdkmanager`, `adb`, `chrome`, `chromedriver`); uncomment it in the workflow to enable those checks.
+
+> Note: the workflow only watches `.devcontainer/devcontainer.json`. Changes to other devcontainer files or `mise.toml` will not trigger it.
+
 ## Customization
 
 - Add tools by editing [`mise.toml`](../mise.toml) — they are installed automatically on container creation.
