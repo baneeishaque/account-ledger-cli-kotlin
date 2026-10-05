@@ -126,7 +126,7 @@ object HandleResponsesInteractiveCli {
                             "Enter Your Choice : "
                         )
                     )
-                    when (readln()) {
+                    when (ConsoleInputUtils.readln()) {
                         "1" -> {
                             return getHandleAccountsResponseFromApiResult(
 

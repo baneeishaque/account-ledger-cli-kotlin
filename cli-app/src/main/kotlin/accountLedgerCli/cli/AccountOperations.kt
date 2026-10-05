@@ -15,6 +15,7 @@ import account.ledger.library.utils.TransactionUtils
 import account.ledger.library.utils.TransactionUtilsInteractive
 import common.utils.library.constants.ConstantsCommon
 import common.utils.library.models.IsOkModel
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import common.utils.library.utils.MysqlUtils
 import io.github.cdimascio.dotenv.Dotenv
@@ -62,7 +63,7 @@ internal fun checkAffectedAccountsAfterSpecifiedDate(
             println("Error : ${(apiResponse.exceptionOrNull() as Exception).localizedMessage}")
             do {
                 print("Retry (Y/N) ? : ")
-                when (readln()) {
+                when (ConsoleInputUtils.readln()) {
 
                     "Y", "" -> {
 
@@ -240,7 +241,7 @@ internal fun viewChildAccounts(
         println("Error : ${(apiResponse.exceptionOrNull() as Exception).localizedMessage}")
         do {
             print("Retry (Y/N) ? : ")
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
                 "Y", "" -> {
                     return viewChildAccounts(
                         username = username, userId = userId,

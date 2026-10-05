@@ -5,6 +5,7 @@ import account.ledger.library.models.ChooseTransactionResultModel
 import account.ledger.library.utils.TransactionUtils.transactionsToTextFromList
 import account_ledger_library.constants.ConstantsNative
 import common.utils.library.constants.ConstantsCommon
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import common.utils.library.utils.ListUtilsInteractive
 
@@ -30,7 +31,7 @@ object HandleTransactionsInteractive {
                     "Enter Your Choice : "
                 )
             )
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
                 "1" -> {
                     return handleTransactionsWithZeroAsBackValue(
 
@@ -94,7 +95,7 @@ object HandleTransactionsInteractive {
 
             listOf("\nEnter Search Key (Part of Particulars) : ")
         )
-        val searchKeyInput: String = readln()
+        val searchKeyInput: String = ConsoleInputUtils.readln()
 
         if (isDevelopmentMode) {
 
@@ -132,7 +133,7 @@ object HandleTransactionsInteractive {
                     )
                 )
 
-                val input: String = readln()
+                val input: String = ConsoleInputUtils.readln()
 
                 if (input == "1") return searchInTransactions(
 
@@ -160,7 +161,7 @@ object HandleTransactionsInteractive {
                     )
                 )
 
-                val input: String = readln()
+                val input: String = ConsoleInputUtils.readln()
 
                 if (input == "1") {
 

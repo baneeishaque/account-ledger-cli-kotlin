@@ -257,7 +257,7 @@ object InsertOperationsInteractive {
                     "Enter Your Choice : "
                 )
             )
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
 
                 "1" -> {
 
@@ -1460,7 +1460,7 @@ object InsertOperationsInteractive {
 
                     inputUInt = InputUtilsInteractive.getValidUnsignedInt(
 
-                        inputText = readln(), invalidMessage = "Please Enter Valid Unsigned Integer"
+                        inputText = ConsoleInputUtils.readln(), invalidMessage = "Please Enter Valid Unsigned Integer"
 
                     ), thresholdValue = thresholdValue, constructInvalidMessage = fun(currentUInt: UInt): String {
 
@@ -2087,7 +2087,7 @@ object InsertOperationsInteractive {
 
                 print("Enter Particulars (Current Value - $localTransactionParticulars), R to Reverse (Reversed Value - $reversedTransactionParticulars), AS to Add Suffix, AP to Add Prefix : ")
 
-                val transactionParticularsInput: String = readln()
+                val transactionParticularsInput: String = ConsoleInputUtils.readln()
                 if (transactionParticularsInput.isNotEmpty()) {
 
                     localTransactionParticulars = if (transactionParticularsInput == "R") {
@@ -2097,13 +2097,13 @@ object InsertOperationsInteractive {
                     } else if (transactionParticularsInput == "AS") {
 
                         print("Enter Suffix : ")
-                        val transactionSuffixInput: String = readln()
+                        val transactionSuffixInput: String = ConsoleInputUtils.readln()
                         val suffixedTransactionParticulars = "$localTransactionParticulars$transactionSuffixInput"
 
                         do {
                             print("Particulars (Current Value - $localTransactionParticulars), (Suffixed Value - $suffixedTransactionParticulars), Do you want to Continue (Y/N) : ")
 
-                            when (readln()) {
+                            when (ConsoleInputUtils.readln()) {
 
                                 "Y", "" -> {
 
@@ -2128,13 +2128,13 @@ object InsertOperationsInteractive {
                     } else if (transactionParticularsInput == "AP") {
 
                         print("Enter Prefix : ")
-                        val transactionPrefixInput: String = readln()
+                        val transactionPrefixInput: String = ConsoleInputUtils.readln()
                         val prefixedTransactionParticulars = "$transactionPrefixInput$localTransactionParticulars"
 
                         do {
                             print("Particulars (Current Value - $localTransactionParticulars), (Prefixed Value - $prefixedTransactionParticulars), Do you want to Continue (Y/N) : ")
 
-                            when (readln()) {
+                            when (ConsoleInputUtils.readln()) {
 
                                 "Y" -> {
 
@@ -2169,7 +2169,7 @@ object InsertOperationsInteractive {
                 }
 
                 print("Enter Amount (Current Value - $localTransactionAmount) : ")
-                val transactionAmountInput: String = readln()
+                val transactionAmountInput: String = ConsoleInputUtils.readln()
                 if (transactionAmountInput.isNotEmpty()) {
 
                     localTransactionAmount = InputUtilsInteractive.getValidFloat(
@@ -2190,7 +2190,7 @@ object InsertOperationsInteractive {
                         "C to continue as it is / P to continue using it's pattern : "
                     )
                 )
-                when (readln()) {
+                when (ConsoleInputUtils.readln()) {
 
                     "C" -> {
 
@@ -2225,14 +2225,14 @@ object InsertOperationsInteractive {
                                 PatternQuestionAnswerTypesEnum.Number -> {
 
                                     print("Enter ${patternQuestion.question} : ")
-                                    answer = InputUtilsInteractive.getValidUnsignedInt(inputText = readln()).toString()
+                                    answer = InputUtilsInteractive.getValidUnsignedInt(inputText = ConsoleInputUtils.readln()).toString()
 
                                 }
 
                                 PatternQuestionAnswerTypesEnum.Float -> {
 
                                     print("Enter ${patternQuestion.question} : ")
-                                    answer = InputUtilsInteractive.getValidFloat(inputText = readln()).toString()
+                                    answer = InputUtilsInteractive.getValidFloat(inputText = ConsoleInputUtils.readln()).toString()
 
                                 }
 
@@ -2470,7 +2470,7 @@ object InsertOperationsInteractive {
 
                 listOfCommands = menuItems
             )
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
 
                 "Y", "" -> {
 

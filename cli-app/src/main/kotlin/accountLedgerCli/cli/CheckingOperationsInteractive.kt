@@ -8,6 +8,7 @@ import account.ledger.library.models.SpecialTransactionTypeModel
 import account.ledger.library.operations.CheckingOperations
 import account.ledger.library.utils.TransactionUtils
 import accountLedgerCli.cli.App.Companion.commandLinePrintMenuWithContinuePrompt
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import io.github.cdimascio.dotenv.Dotenv
 
@@ -47,7 +48,7 @@ internal fun transactionContinueCheck(
                 "", "Continue (Y/N) : "
             )
         )
-        when (readln()) {
+        when (ConsoleInputUtils.readln()) {
             "Y", "" -> {
 
                 return CheckingOperations.addTransactionWithAccountAvailabilityCheck(

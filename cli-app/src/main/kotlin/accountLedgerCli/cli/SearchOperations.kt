@@ -5,6 +5,7 @@ import account.ledger.library.enums.AccountsListSortMode
 import account.ledger.library.utils.AccountUtils
 import account_ledger_library.constants.ConstantsNative
 import common.utils.library.constants.ConstantsCommon
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import common.utils.library.utils.ListUtilsInteractive
 
@@ -19,7 +20,7 @@ fun searchAccount(
     App.commandLinePrintMenuWithEnterPrompt.printMenuWithEnterPromptFromListOfCommands(
         listOf("\nEnter Search Key : ")
     )
-    val searchKeyInput: String = readln()
+    val searchKeyInput: String = ConsoleInputUtils.readln()
 
     val searchResult: LinkedHashMap<UInt, AccountResponse> = searchOnHashMapValues(
 
@@ -41,7 +42,7 @@ fun searchAccount(
                 )
             )
 
-            val input: String = readln()
+            val input: String = ConsoleInputUtils.readln()
 
             if (input == "1") return searchAccount(
                 userAccountsMap = userAccountsMap,
@@ -68,7 +69,7 @@ fun searchAccount(
                     "Enter Your Choice : "
                 )
             )
-            val input: String = readln()
+            val input: String = ConsoleInputUtils.readln()
             if (input == "1") {
 
                 return ListUtilsInteractive.getValidIndexFromCollectionWithSelectionPromptAndZeroAsBack(

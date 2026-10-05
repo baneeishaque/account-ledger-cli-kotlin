@@ -19,6 +19,7 @@ import account.ledger.library.utils.UserUtils
 import account.ledger.library.utils.UserUtilsInteractive
 import accountLedgerCli.cli.App.Companion.commandLinePrintMenuWithEnterPrompt
 import common.utils.library.models.CommonDataModel
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import io.github.cdimascio.dotenv.Dotenv
 import kotlinx.coroutines.runBlocking
@@ -78,7 +79,7 @@ class UserOperationsInterActiveWithApiService {
                     do {
                         displayCurrentUser(user)
                         print("Do you want to continue (Y/N) : ")
-                        when (readlnOrNull().toString()) {
+                        when (ConsoleInputUtils.readlnOrNull().toString()) {
                             "Y", "" -> {
                                 break
                             }
@@ -109,7 +110,7 @@ class UserOperationsInterActiveWithApiService {
                     println("Error : ${(apiResponse.getValue() as Exception).localizedMessage}")
                     do {
                         print("Retry (Y/N) ? : ")
-                        when (readln()) {
+                        when (ConsoleInputUtils.readln()) {
                             "Y", "" -> {
                                 return login(
                                     username = username,
@@ -396,7 +397,7 @@ class UserOperationsInterActiveWithApiService {
                 println("Error : ${(apiResponse.getValue() as Exception).localizedMessage}")
                 do {
                     print("Retry (Y/N) ? : ")
-                    when (readln()) {
+                    when (ConsoleInputUtils.readln()) {
                         "Y", "" -> {
                             return listUsers(
                                 fromAccount = fromAccount,
@@ -469,7 +470,7 @@ class UserOperationsInterActiveWithApiService {
                                 "Enter Your Choice : "
                             )
                         )
-                        when (readln()) {
+                        when (ConsoleInputUtils.readln()) {
 
                             "1" -> {
 

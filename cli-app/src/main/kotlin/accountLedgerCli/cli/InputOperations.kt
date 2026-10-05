@@ -7,6 +7,7 @@ import account.ledger.library.operations.ServerOperations
 import account.ledger.library.utils.ApiUtilsInteractive
 import accountLedgerCli.cli.App.Companion.commandLinePrintMenuWithBackPrompt
 import account_ledger_library.constants.ConstantsNative
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.InputUtilsInteractive
 import common.utils.library.utils.ErrorUtilsInteractive
 
@@ -181,7 +182,7 @@ object InputOperations {
                     "\tB to Back : "
         )
 
-        when (val userInput = readlnOrNull()) {
+        when (val userInput = ConsoleInputUtils.readlnOrNull()) {
 
             "Y", "" -> {
 

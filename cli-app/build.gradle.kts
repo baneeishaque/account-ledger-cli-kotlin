@@ -27,6 +27,8 @@ dependencies {
 
     implementation(dependencyNotation = libs.dotenv.kotlin)
 
+    implementation(dependencyNotation = libs.jline)
+
     implementation(dependencyNotation = project(path = ":account-ledger-lib:account-ledger-lib"))
     implementation(dependencyNotation = project(path = ":account-ledger-lib-multi-platform:lib"))
     implementation(dependencyNotation = project(path = ":common-lib:common-lib"))

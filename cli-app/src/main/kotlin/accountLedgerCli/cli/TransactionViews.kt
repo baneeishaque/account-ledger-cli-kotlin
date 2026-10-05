@@ -285,7 +285,7 @@ object TransactionViews {
                     }
                     commandLinePrintMenuWithEnterPrompt.printMenuWithEnterPromptFromListOfCommands(menuItems)
 
-                    choice = readln()
+                    choice = ConsoleInputUtils.readln()
 
                     var addTransactionResult = InsertTransactionResult(
 
@@ -470,7 +470,7 @@ object TransactionViews {
                                         userAccountsMap[selectedTransaction.fromAccountId]!!
                                     do {
                                         println("Do you want to change Withdraw A/C (Y/N) (Default : N) : ")
-                                        when (readln()) {
+                                        when (ConsoleInputUtils.readln()) {
                                             "Y" -> {
 
                                                 val chooseAccountResult: ChooseAccountResult =
@@ -500,7 +500,7 @@ object TransactionViews {
                                         userAccountsMap[selectedTransaction.toAccountId]!!
                                     do {
                                         print("Do you want to change Deposit A/C (Y/N) (Default : N) : ")
-                                        when (readln()) {
+                                        when (ConsoleInputUtils.readln()) {
                                             "Y" -> {
 
                                                 val chooseAccountResult: ChooseAccountResult =
@@ -1113,7 +1113,7 @@ object TransactionViews {
 
     ) {
         print("Enter Account Index or 0 to Back : A")
-        val userInputForAccountIndex: String = readln()
+        val userInputForAccountIndex: String = ConsoleInputUtils.readln()
         if (userInputForAccountIndex != "0") {
 
             AccountUtilsInteractive.processUserAccountsMap<Any>(

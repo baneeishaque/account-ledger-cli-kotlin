@@ -15,7 +15,13 @@ import io.github.cdimascio.dotenv.Dotenv
 import io.github.cdimascio.dotenv.dotenv
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ExperimentalCli
+import org.jline.reader.EndOfFileException
+import org.jline.reader.LineReaderBuilder
+import org.jline.reader.UserInterruptException
+import org.jline.terminal.TerminalBuilder
+import java.io.EOFException
 import java.nio.file.Paths
+import kotlin.system.exitProcess
 
 class App {
     companion object {
@@ -98,6 +104,7 @@ class App {
         @JvmStatic
         fun main(args: Array<String>) {
 
+            initializeConsoleInputWithHistory()
             if (args.isEmpty()) {
 
                 do {
@@ -122,7 +129,7 @@ class App {
                             "Enter Your Choice : "
                         )
                     )
-                    when (readln()) {
+                    when (ConsoleInputUtils.readln()) {
                         "1", "" -> {
 
                             processInsertTransactionResult(
@@ -233,6 +240,34 @@ class App {
                     )
                 )
                 parser.parse(args = args)
+            }
+        }
+
+        private fun initializeConsoleInputWithHistory() {
+
+            runCatching {
+
+                val terminal = TerminalBuilder.builder()
+                    .system(true)
+                    .build()
+                val lineReader = LineReaderBuilder.builder()
+                    .terminal(terminal)
+                    .build()
+                ConsoleInputUtils.setLineReader {
+
+                    try {
+
+                        lineReader.readLine()
+
+                    } catch (exception: EndOfFileException) {
+
+                        throw EOFException()
+
+                    } catch (exception: UserInterruptException) {
+
+                        exitProcess(130)
+                    }
+                }
             }
         }
 

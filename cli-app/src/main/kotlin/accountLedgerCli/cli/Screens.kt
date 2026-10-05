@@ -189,7 +189,7 @@ object Screens {
                     "Enter Your Choice : "
                 )
             )
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
 
                 "1" -> {
 
@@ -1475,7 +1475,7 @@ object Screens {
                     "Enter Your Choice : "
                 )
             )
-            when (readln()) {
+            when (ConsoleInputUtils.readln()) {
 
                 "1" -> {
                     localInsertTransactionResult = TransactionViews.viewTransactionsForAnAccount(

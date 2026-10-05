@@ -6,6 +6,7 @@ import account.ledger.library.models.InsertTransactionResult
 import account.ledger.library.models.ViewTransactionsOutput
 import account.ledger.library.operations.InsertOperations
 import account.ledger.library.utils.AccountUtils
+import common.utils.library.utils.ConsoleInputUtils
 import common.utils.library.utils.ErrorUtilsInteractive
 import common.utils.library.utils.ListUtilsInteractive
 import io.github.cdimascio.dotenv.Dotenv
@@ -26,7 +27,7 @@ fun processChildAccountScreenInput(
 
 ): ViewTransactionsOutput {
 
-    val choice: String = readln()
+    val choice: String = ConsoleInputUtils.readln()
     var accountHomeOutput = InsertTransactionResult(
 
         isSuccess = false,
@@ -160,7 +161,7 @@ internal fun addAccountInteractive(
 
 ) {
     print("Account Name : ")
-    val name: String = readln().trim()
+    val name: String = ConsoleInputUtils.readln().trim()
     if (name.isEmpty()) {
 
         println("A/C Name cannot be empty.")
@@ -168,22 +169,22 @@ internal fun addAccountInteractive(
     }
 
     print("Notes (optional) : ")
-    val notes: String = readln().trim()
+    val notes: String = ConsoleInputUtils.readln().trim()
 
     print("Account Type [GROUP] : ")
-    val accountType: String = readln().trim().ifEmpty { "GROUP" }
+    val accountType: String = ConsoleInputUtils.readln().trim().ifEmpty { "GROUP" }
 
     print("Commodity Type [CURRENCY] : ")
-    val commodityType: String = readln().trim().ifEmpty { "CURRENCY" }
+    val commodityType: String = ConsoleInputUtils.readln().trim().ifEmpty { "CURRENCY" }
 
     print("Commodity Value [INR] : ")
-    val commodityValue: String = readln().trim().ifEmpty { "INR" }
+    val commodityValue: String = ConsoleInputUtils.readln().trim().ifEmpty { "INR" }
 
     print("Taxable (y/N) : ")
-    val taxable: Boolean = readln().trim().equals(other = "y", ignoreCase = true)
+    val taxable: Boolean = ConsoleInputUtils.readln().trim().equals(other = "y", ignoreCase = true)
 
     print("Place Holder (y/N) : ")
-    val placeHolder: Boolean = readln().trim().equals(other = "y", ignoreCase = true)
+    val placeHolder: Boolean = ConsoleInputUtils.readln().trim().equals(other = "y", ignoreCase = true)
 
     val fullName: String = "${parentAccount.fullName}:$name"
 
@@ -219,29 +220,29 @@ internal fun editAccountInteractive(
     println("Editing Account [${account.fullName}] (press Enter to keep current value)")
 
     print("Account Name [${account.name}] : ")
-    val name: String = readln().trim().ifEmpty { account.name }
+    val name: String = ConsoleInputUtils.readln().trim().ifEmpty { account.name }
 
     val currentNotes: String = account.notes ?: ""
     print("Notes [${currentNotes}] : ")
-    val notes: String = readln().trim().ifEmpty { currentNotes }
+    val notes: String = ConsoleInputUtils.readln().trim().ifEmpty { currentNotes }
 
     print("Account Type [${account.accountType}] : ")
-    val accountType: String = readln().trim().ifEmpty { account.accountType }
+    val accountType: String = ConsoleInputUtils.readln().trim().ifEmpty { account.accountType }
 
     print("Commodity Type [${account.commodityType}] : ")
-    val commodityType: String = readln().trim().ifEmpty { account.commodityType }
+    val commodityType: String = ConsoleInputUtils.readln().trim().ifEmpty { account.commodityType }
 
     print("Commodity Value [${account.commodityValue}] : ")
-    val commodityValue: String = readln().trim().ifEmpty { account.commodityValue }
+    val commodityValue: String = ConsoleInputUtils.readln().trim().ifEmpty { account.commodityValue }
 
     val currentTaxable: Boolean = account.taxable.equals(other = "T", ignoreCase = true)
     print("Taxable (y/N) [${if (currentTaxable) "Y" else "N"}] : ")
-    val taxableInput: String = readln().trim()
+    val taxableInput: String = ConsoleInputUtils.readln().trim()
     val taxable: Boolean = if (taxableInput.isEmpty()) currentTaxable else taxableInput.equals(other = "y", ignoreCase = true)
 
     val currentPlaceHolder: Boolean = account.placeHolder.equals(other = "T", ignoreCase = true)
     print("Place Holder (y/N) [${if (currentPlaceHolder) "Y" else "N"}] : ")
-    val placeHolderInput: String = readln().trim()
+    val placeHolderInput: String = ConsoleInputUtils.readln().trim()
     val placeHolder: Boolean = if (placeHolderInput.isEmpty()) currentPlaceHolder else placeHolderInput.equals(other = "y", ignoreCase = true)
 
     val parentFullName: String = account.fullName.substringBeforeLast(delimiter = ":", missingDelimiterValue = "")
@@ -277,7 +278,7 @@ internal fun deleteAccountInteractive(
 ) {
     println("About to delete Account [${account.fullName}] (id=${account.id}).")
     print("Are you sure? (y/N) : ")
-    val confirm: String = readln().trim()
+    val confirm: String = ConsoleInputUtils.readln().trim()
     if (!confirm.equals(other = "y", ignoreCase = true)) {
 
         println("Delete cancelled.")
