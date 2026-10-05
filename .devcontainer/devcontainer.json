@@ -75,6 +75,7 @@
 				"vscode.mermaid-markdown-features"
 				// "github.vscode-pull-request-github",
 				// "ms-vscode-remote.remote-containers",
+				// "ms-azuretools.vscode-containers",
 				// "nick-rudenko.back-n-forth",
 			]
 		}
