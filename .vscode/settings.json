@@ -62,6 +62,7 @@
   "gitlens.codeLens.includeSingleLineSymbols": true,
   "gitlens.detectNestedRepositories": true,
   "gitlens.gitkraken.cli.integration.enabled": true,
+  "gitlens.graph.details.location": "auto",
   "gitlens.graph.dimMergeCommits": true,
   "gitlens.graph.showRemoteNames": true,
   "gitlens.views.branches.showRemoteBranches": true,
