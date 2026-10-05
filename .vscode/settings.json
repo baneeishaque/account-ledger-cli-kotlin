@@ -105,5 +105,6 @@
   "markdown.validate.unusedLinkDefinitions.enabled": "error",
   "open-in-new-window.showNotification": true,
   "redhat.telemetry.enabled": true,
-  "references.preferredLocation": "view"
+  "references.preferredLocation": "view",
+  "github-actions.workflows.pinned.refresh.enabled": true
 }
