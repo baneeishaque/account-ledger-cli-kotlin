@@ -173,5 +173,7 @@
   "open-in-new-window.showNotification": true,
   "redhat.telemetry.enabled": true,
   "references.preferredLocation": "view",
-  "github-actions.workflows.pinned.refresh.enabled": true
+  "github-actions.workflows.pinned.refresh.enabled": true,
+  "yaml.disableAdditionalProperties": true,
+  "yaml.suggest.parentSkeletonSelectedFirst": true
 }
