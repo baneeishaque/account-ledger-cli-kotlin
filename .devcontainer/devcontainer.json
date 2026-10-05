@@ -31,7 +31,7 @@
 				"r0kuko.vscode-gradle-kotlin",
 				"jetbrains.intellij-server",
 				"fwcd.kotlin",
-				"jetbrains.kotlin-server",
+				// "jetbrains.kotlin-server",
 				"victorchen.kotlin-java-language-server",
 				"elumine.kotlin-jump",
 				"mathiasfrohlich.kotlin",
