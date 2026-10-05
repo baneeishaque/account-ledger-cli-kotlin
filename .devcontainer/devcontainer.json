@@ -69,7 +69,10 @@
 				"vscode.git",
 				"vscode.configuration-editing",
 				"github.copilot-chat",
-				"vscode.log"
+				"vscode.log",
+				"vscode.markdown",
+				"vscode.markdown-language-features",
+				"vscode.mermaid-markdown-features"
 				// "github.vscode-pull-request-github",
 				// "ms-vscode-remote.remote-containers",
 				// "nick-rudenko.back-n-forth",
