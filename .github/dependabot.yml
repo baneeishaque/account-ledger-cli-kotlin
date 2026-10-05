@@ -1,0 +1,206 @@
+# Dependabot version updates - full-capability configuration.
+# Options reference:
+# https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference
+#
+# Ecosystems detected in this repository:
+#   gradle         - build.gradle.kts, settings.gradle.kts, gradle/libs.versions.toml, Gradle wrapper
+#   github-actions - .github/workflows/*.yml
+#   devcontainers  - .devcontainer/devcontainer.json
+#   docker         - .gitpod.Dockerfile
+#   gitsubmodule   - .gitmodules (account-ledger-lib, api)
+#
+# Security updates (Dependabot alerts) are a separate repository setting:
+# Settings > Advanced Security > Dependabot.
+
+version: 2
+
+updates:
+
+  # Gradle / Kotlin - root build, cli-app subproject, version catalog and wrapper.
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "UTC"
+    # Effectively removes the default cap of 5 open version-update pull requests.
+    open-pull-requests-limit: 50
+    # Delay after a release before opening a PR (supply-chain risk reduction).
+    cooldown:
+      default-days: 3
+      semver-major-days: 7
+      semver-minor-days: 3
+      semver-patch-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    assignees:
+      - "baneeishaque"
+    # The reviewers key is being retired on GHES; CODEOWNERS is the successor.
+    reviewers:
+      - "baneeishaque"
+    groups:
+      # One PR for all major bumps in this ecosystem.
+      major-updates:
+        applies-to: version-updates
+        update-types:
+          - "major"
+        patterns:
+          - "*"
+      # One PR for all minor and patch bumps in this ecosystem.
+      minor-patch-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      # One PR for all security updates in this ecosystem.
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  # GitHub Actions - actions and reusable workflows under .github/workflows.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 50
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    assignees:
+      - "baneeishaque"
+    reviewers:
+      - "baneeishaque"
+    groups:
+      major-updates:
+        applies-to: version-updates
+        update-types:
+          - "major"
+        patterns:
+          - "*"
+      minor-patch-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  # Dev Container - base image and Dev Container Features in devcontainer.json.
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 50
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    assignees:
+      - "baneeishaque"
+    reviewers:
+      - "baneeishaque"
+    groups:
+      major-updates:
+        applies-to: version-updates
+        update-types:
+          - "major"
+        patterns:
+          - "*"
+      minor-patch-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  # Docker - base image in .gitpod.Dockerfile.
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 50
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    assignees:
+      - "baneeishaque"
+    reviewers:
+      - "baneeishaque"
+    groups:
+      major-updates:
+        applies-to: version-updates
+        update-types:
+          - "major"
+        patterns:
+          - "*"
+      minor-patch-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  # Git submodules - account-ledger-lib and api pointers in .gitmodules.
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "05:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 50
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    assignees:
+      - "baneeishaque"
+    reviewers:
+      - "baneeishaque"
+    groups:
+      major-updates:
+        applies-to: version-updates
+        update-types:
+          - "major"
+        patterns:
+          - "*"
+      minor-patch-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
