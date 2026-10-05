@@ -102,5 +102,6 @@
   "git.terminalGitEditor": true,
   "git.timeline.showUncommitted": true,
   "git.useCommitInputAsStashMessage": true,
-  "references.preferredLocation": "view"
+  "references.preferredLocation": "view",
+  "kotlin.compiler.jvm.target": "27"
 }
