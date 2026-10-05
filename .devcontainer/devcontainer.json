@@ -6,7 +6,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"lostintangent.github-security-alerts",
+				// "lostintangent.github-security-alerts",
 				// "atlassian.atlascode",
 				// "anthropic.claude-code",
 				// "fittentech.fitten-code",
