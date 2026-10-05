@@ -1,0 +1,31 @@
+name: Test Dev Container
+
+on:
+  push:
+    paths:
+      - '.devcontainer/devcontainer.json'
+  pull_request:
+    paths:
+      - '.devcontainer/devcontainer.json'
+
+jobs:
+  test-devcontainer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Dev Containers CLI
+        run: npm install -g @devcontainers/cli
+
+      - name: Build devcontainer
+        run: devcontainer build --workspace-folder .
+
+      # - name: Check tool versions in devcontainer
+      #   run: |
+      #     devcontainer exec --workspace-folder . "
+      #       echo 'sdkmanager:' && sdkmanager --version
+      #       echo 'adb:' && adb --version
+      #       echo 'chrome:' && chrome --version
+      #       echo 'chromedriver:' && chromedriver --version
+      #     "
