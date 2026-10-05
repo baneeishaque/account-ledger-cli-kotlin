@@ -78,7 +78,6 @@
 	},
 	"features": {
 		// "ghcr.io/cirolosapio/devcontainers-features/alpine-opencode:0": {},
-		"ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {},
 		// "ghcr.io/devcontainers-extra/features/codename-goose-cli:1": {},
 		// "ghcr.io/devcontainers-extra/features/gradle-sdkman:2": {},
 		// "ghcr.io/devcontainers-extra/features/gradleprofiler-sdkman:2": {},
@@ -86,7 +85,6 @@
 		// "ghcr.io/devcontainers-extra/features/kotlin-sdkman:2": {},
 		// "ghcr.io/devcontainers-extra/features/kscript-sdkman:2": {},
 		"ghcr.io/devcontainers-extra/features/mise:1": {},
-		// "ghcr.io/devcontainers-extra/features/opencode:1": {},
 		// "ghcr.io/devcontainers-extra/features/powershell:1": {},
 		"ghcr.io/devcontainers/features/git-lfs:1": {},
 		// "ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {
@@ -98,16 +96,22 @@
 		// "ghcr.io/joshuanianji/devcontainer-features/opencode-persistence:1": {},
 		// "ghcr.io/jpawlowski/devcontainer-features/powershell-extended:2": {},
 		// "ghcr.io/jsburckhardt/devcontainer-features/open-code-review:1": {},
-		// "ghcr.io/jsburckhardt/devcontainer-features/opencode:1": {},
 		// "ghcr.io/mikaello/devcontainer-features/kotlinc:1": {},
 		// "ghcr.io/natescherer/devcontainers-custom-features/powershell-resources:1": {},
-		// "ghcr.io/postfinance/devcontainer-features/opencode:1": {},
 		// "ghcr.io/roul/devcontainer-features/mise-java:1": {},
-		"ghcr.io/skriptfabrik/devcontainer-features/gitlab-cli:1": {}
-		// "ghcr.io/sliekens/devcontainer-features/opencode:1": {},
-		// "ghcr.io/stu-bell/devcontainer-features/open-code:0": {},
+		"ghcr.io/skriptfabrik/devcontainer-features/gitlab-cli:1": {},
 		// "ghcr.io/tcaky/devcontainer-features/alpine-powershell:0": {},
-		// "ghcr.io/wcgomes/devcontainer-features/opencode:0": {}
+
+		"ghcr.io/stu-bell/devcontainer-features/open-code:0": {}
+
+		// "ghcr.io/jsburckhardt/devcontainer-features/opencode:1": {},
+
+		// "ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1": {},
+		// "ghcr.io/devcontainers-extra/features/opencode:1": {},
+		// "ghcr.io/sliekens/devcontainer-features/opencode:1": {},
+		// "ghcr.io/wcgomes/devcontainer-features/opencode:0": {},
+
+		// "ghcr.io/postfinance/devcontainer-features/opencode:1": {}
 	},
 	"image": "mcr.microsoft.com/devcontainers/base:3.0.8-ubuntu26.04",
 	"postCreateCommand": "mise trust --yes && mise install"
