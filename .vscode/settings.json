@@ -104,5 +104,6 @@
   "markdown.validate.referenceLinks.enabled": "error",
   "markdown.validate.unusedLinkDefinitions.enabled": "error",
   "open-in-new-window.showNotification": true,
+  "redhat.telemetry.enabled": true,
   "references.preferredLocation": "view"
 }
