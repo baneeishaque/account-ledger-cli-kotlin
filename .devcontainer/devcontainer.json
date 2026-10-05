@@ -105,7 +105,7 @@
 		"ghcr.io/skriptfabrik/devcontainer-features/gitlab-cli:1": {},
 		// "ghcr.io/tcaky/devcontainer-features/alpine-powershell:0": {},
 
-		"ghcr.io/stu-bell/devcontainer-features/open-code:0": {}
+		"ghcr.io/stu-bell/devcontainer-features/open-code:0": {},
 
 		// "ghcr.io/jsburckhardt/devcontainer-features/opencode:1": {},
 
@@ -115,6 +115,14 @@
 		// "ghcr.io/wcgomes/devcontainer-features/opencode:0": {},
 
 		// "ghcr.io/postfinance/devcontainer-features/opencode:1": {}
+
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/SrzStephen/devcontainer-features/act:1": {},
+
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		// "ghcr.io/bartventer/arch-devcontainer-features/docker-outside-of-docker:1": {}
+		//  "ghcr.io/devcontainers/features/docker-in-docker:4": {}
+		// "ghcr.io/bartventer/arch-devcontainer-features/docker-in-docker:1": {}
 	},
 	"image": "mcr.microsoft.com/devcontainers/base:3.0.8-ubuntu26.04",
 	"postCreateCommand": "mise trust --yes && mise install"
