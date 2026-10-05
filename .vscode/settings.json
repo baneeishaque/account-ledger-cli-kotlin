@@ -15,7 +15,8 @@
   "dotenv.enableAutocloaking": false,
   "dotenv.enableSecretpeeking": false,
   "files.associations": {
-    ".env*": "dotenv"
+    ".env*": "dotenv",
+    // ".github/workflows/*.yml": "yaml",
   },
   "fileutils.duplicateFile.typeahead.enabled": true,
   "fileutils.moveFile.typeahead.enabled": true,
