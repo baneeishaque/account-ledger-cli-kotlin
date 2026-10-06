@@ -32,7 +32,7 @@ jobs:
           fail_level: error
 
   build:
-    name: 'Premium Gradle Build (JDK 21)'
+    name: 'Premium Gradle Build (JDK 27)'
     needs: lint
     runs-on: ubuntu-24.04
 
