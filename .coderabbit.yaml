@@ -1,0 +1,58 @@
+# CodeRabbit configuration - free forever for public repositories.
+# Schema: https://coderabbit.ai/integrations/schema.v2.json
+# Install the CodeRabbit GitHub App on this repository to activate.
+
+language: en-US
+
+reviews:
+  profile: assertive
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: true
+  sequence_diagrams: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: true
+  suggested_labels: true
+  auto_apply_labels: false
+  suggested_reviewers: true
+  auto_assign_reviewers: false
+  in_progress_fortune: false
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    base_branches:
+      - master
+    ignore_title_keywords:
+      - WIP
+      - DO NOT MERGE
+  tools:
+    actionlint:
+      enabled: true
+    checkov:
+      enabled: true
+    detekt:
+      enabled: true
+    gitleaks:
+      enabled: true
+    hadolint:
+      enabled: true
+    osvScanner:
+      enabled: true
+    semgrep:
+      enabled: true
+    shellcheck:
+      enabled: true
+    trivy:
+      enabled: true
+    zizmor:
+      enabled: true
+    github-checks:
+      enabled: true
+
+chat:
+  auto_reply: true
