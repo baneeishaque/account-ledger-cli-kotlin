@@ -1,0 +1,24 @@
+# Socket.dev GitHub App configuration - free for open source repositories.
+# Docs: https://docs.socket.dev/docs/socket-yml
+# Install the Socket GitHub App on this repository to activate.
+
+version: 2
+
+projectIgnorePaths:
+  - "build"
+  - ".gradle"
+  - ".kotlin"
+  - ".idea"
+
+triggerPaths:
+  - "build.gradle.kts"
+  - "settings.gradle.kts"
+  - "gradle/libs.versions.toml"
+  - "gradle/wrapper/gradle-wrapper.properties"
+
+githubApp:
+  enabled: true
+  pullRequestAlertsEnabled: true
+  dependencyOverviewEnabled: true
+  projectReportsEnabled: true
+  disableCommentsAndCheckRuns: false
