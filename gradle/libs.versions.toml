@@ -2,7 +2,7 @@
 kotlin = "2.4.20-tethys-25"
 ktor = "3.6.0-typed-auth-dsl-eap-1641"
 agp = "9.4.1"
-jline = "3.30.17"
+jline = "4.4.7"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version = "0.3.6" }
