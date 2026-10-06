@@ -1,0 +1,79 @@
+name: 'Security: IaC (Checkov + KICS)'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '11 5 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: iac-security-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checkov:
+    name: 'Checkov'
+    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@99bb2caf247dfd9f03cf984373bc6043d4e32ebf # v12.1347.0
+        with:
+          directory: .
+          output_format: sarif
+          output_file_path: checkov-results.sarif
+          soft_fail: true
+          skip_download: true
+          download_external_modules: false
+          enable_secrets_scan_all_files: true
+          skip_path: 'build,.gradle,.kotlin,.idea'
+          log_level: WARNING
+
+      - name: Upload SARIF
+        if: ${{ always() && hashFiles('checkov-results.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
+        with:
+          sarif_file: checkov-results.sarif
+          category: checkov
+
+  kics:
+    name: 'KICS'
+    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Run KICS
+        uses: checkmarx/kics-github-action@05aa5eb70eede1355220f4ca5238d96b397e30a6 # v2.1.20
+        with:
+          path: .
+          output_formats: sarif
+          output_path: kics-results
+          ignore_on_exit: results
+          enable_jobs_summary: true
+          enable_comments: false
+
+      - name: Upload SARIF
+        if: ${{ always() && hashFiles('kics-results/results.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
+        with:
+          sarif_file: kics-results/results.sarif
+          category: kics
