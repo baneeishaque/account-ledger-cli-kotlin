@@ -51,3 +51,6 @@ native-image --static --no-fallback --allow-incomplete-classpath -H:+AddAllChars
 -   **Dependencies:** The project uses `libs.versions.toml` in the `gradle` directory to manage dependency versions centrally.
 -   **CI/CD:** Continuous Integration is configured in `.github/workflows/gradle-build.yml` (actionlint, ShellCheck, Gradle build), `.travis.yml`, and `azure-pipelines-ubuntu.yml`.
 
+## Security Scanning
+
+A layered, zero-cost security stack runs in GitHub Actions: CodeQL (Java/Kotlin), Semgrep OSS, Trivy, Checkov, KICS, Gitleaks, Dependency Review, OpenSSF Scorecard, zizmor, repository-wide ShellCheck, Hadolint, and PR-Agent (AI review via GitHub Models). Snyk and SonarCloud run when their repository secrets are configured. See [SECURITY.md](SECURITY.md) for the inventory, required secrets, and manual app activations.
