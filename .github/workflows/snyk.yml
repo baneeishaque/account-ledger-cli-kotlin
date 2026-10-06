@@ -1,0 +1,74 @@
+name: 'Security: Snyk'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '7 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: snyk-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  snyk:
+    name: 'Snyk Code + Open Source'
+    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Detect Snyk token
+        id: detect
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          if [ -n "$SNYK_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "SNYK_TOKEN is not set - skipping Snyk scans." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Set up Snyk CLI
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        uses: snyk/actions/setup@9adf32b1121593767fc3c057af55b55db032dc04 # v1.0.0
+
+      - name: Snyk Open Source test
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --all-projects --severity-threshold=low --sarif-file-output=snyk-oss.sarif
+
+      - name: Snyk Code test
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk code test --severity-threshold=low --sarif-file-output=snyk-code.sarif
+
+      - name: Upload Snyk Open Source SARIF
+        if: ${{ always() && steps.detect.outputs.enabled == 'true' && hashFiles('snyk-oss.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
+        with:
+          sarif_file: snyk-oss.sarif
+          category: snyk-oss
+
+      - name: Upload Snyk Code SARIF
+        if: ${{ always() && steps.detect.outputs.enabled == 'true' && hashFiles('snyk-code.sarif') != '' }}
+        uses: github/codeql-action/upload-sarif@b96794f015dfd88f77b49b1c93e0fa7110f94c63 # v4.38.0
+        with:
+          sarif_file: snyk-code.sarif
+          category: snyk-code
