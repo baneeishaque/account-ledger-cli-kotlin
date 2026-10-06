@@ -1,0 +1,72 @@
+name: 'Security: SonarCloud'
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '27 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: sonarcloud-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  sonarcloud:
+    name: 'SonarCloud analysis'
+    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Detect Sonar token
+        id: detect
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -n "$SONAR_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "SONAR_TOKEN is not set - skipping SonarCloud analysis." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Checkout repository
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Gradle
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92 # v6
+        with:
+          gradle-version: wrapper
+
+      - name: Build with coverage
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        continue-on-error: true
+        run: |
+          chmod +x gradlew
+          ./gradlew :cli-app:classes :cli-app:test :cli-app:jacocoTestReport --no-daemon
+        shell: bash
+
+      - name: SonarCloud scan
+        if: ${{ steps.detect.outputs.enabled == 'true' }}
+        continue-on-error: true
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
