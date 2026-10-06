@@ -1,0 +1,6 @@
+ci(security): add Semgrep OSS scanning workflow
+
+- Scan with the auto, security-audit, owasp-top-ten, and secrets
+  rulesets using the pinned Semgrep container.
+- Upload SARIF findings to code scanning and keep the job advisory so
+  new findings never block merges.

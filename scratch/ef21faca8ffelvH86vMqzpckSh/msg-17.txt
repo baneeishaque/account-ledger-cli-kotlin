@@ -1,0 +1,6 @@
+docs(security): add security scanning documentation
+
+- Document each workflow, its findings destination, and whether it
+  blocks merges so reviewers know where results appear.
+- List the manual activations that remain: the CodeRabbit and Socket
+  app installs and the optional Snyk and SonarCloud tokens.

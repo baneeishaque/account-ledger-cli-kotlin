@@ -1,0 +1,89 @@
+
+===== pre-state =====
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? .coderabbit.yaml
+?? .github/workflows/dependency-review.yml
+?? .github/workflows/gitleaks.yml
+?? .github/workflows/pr-agent.yml
+?? .github/workflows/scorecard.yml
+?? .github/workflows/snyk.yml
+?? .github/workflows/sonarcloud.yml
+?? .github/workflows/static-analysis.yml
+?? .github/workflows/zizmor.yml
+?? SECURITY.md
+?? socket.yml
+?? sonar-project.properties
+2c940fe7af51cc17d2e5c380b136b888070e306a
+stash@{0}: On master: safety: pre-batch-1 commit sequence
+
+===== commit 6 =====
+[master 8c0aaf0] ci(security): add Gitleaks secret scanning workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 37 insertions(+)
+ create mode 100644 .github/workflows/gitleaks.yml
+VERIFY commit 6: OK [.github/workflows/gitleaks.yml ]
+
+===== commit 7 =====
+[master e22e9ed] ci(security): add OpenSSF Scorecard workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 46 insertions(+)
+ create mode 100644 .github/workflows/scorecard.yml
+VERIFY commit 7: OK [.github/workflows/scorecard.yml ]
+
+===== commit 8 =====
+[master 74fb853] ci(security): add dependency review workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 27 insertions(+)
+ create mode 100644 .github/workflows/dependency-review.yml
+VERIFY commit 8: OK [.github/workflows/dependency-review.yml ]
+
+===== commit 9 =====
+[master cffb06c] ci(security): add zizmor GitHub Actions audit workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 41 insertions(+)
+ create mode 100644 .github/workflows/zizmor.yml
+VERIFY commit 9: OK [.github/workflows/zizmor.yml ]
+
+===== commit 10 =====
+[master 211774c] ci(security): add Snyk Code and open source scanning workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 74 insertions(+)
+ create mode 100644 .github/workflows/snyk.yml
+VERIFY commit 10: OK [.github/workflows/snyk.yml ]
+
+===== post-state =====
+211774c ci(security): add Snyk Code and open source scanning workflow
+cffb06c ci(security): add zizmor GitHub Actions audit workflow
+74fb853 ci(security): add dependency review workflow
+e22e9ed ci(security): add OpenSSF Scorecard workflow
+8c0aaf0 ci(security): add Gitleaks secret scanning workflow
+2c940fe ci(security): add Checkov and KICS IaC scanning workflows
+bf46fb4 ci(security): add Trivy vulnerability and secret scanning workflow
+565aac6 ci(security): add Semgrep OSS scanning workflow
+01c5d10 ci(security): add CodeQL code scanning workflow
+daeab28 chore: ignore scratch directory
+24021eb format code
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? .coderabbit.yaml
+?? .github/workflows/pr-agent.yml
+?? .github/workflows/sonarcloud.yml
+?? .github/workflows/static-analysis.yml
+?? SECURITY.md
+?? socket.yml
+?? sonar-project.properties
+
+BATCH-2-EXECUTION-COMPLETE

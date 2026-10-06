@@ -1,0 +1,6 @@
+ci(security): add dependency review workflow
+
+- Block pull requests that introduce dependencies with high or
+  critical advisories; this is the only gating scanner in the stack.
+- Disable the pull request summary comment so review threads stay
+  clean, leaving the check result as the verdict.

@@ -1,0 +1,5 @@
+ci(security): add repository-wide ShellCheck and Hadolint workflow
+
+- Extend shell linting beyond the scripts checked by the build
+  workflow to every shell script in the repository.
+- Lint .gitpod.Dockerfile with Hadolint; both jobs stay advisory.

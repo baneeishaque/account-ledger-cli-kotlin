@@ -1,0 +1,5 @@
+docs(security): document security scanning stack in GEMINI.md
+
+- Add a Security Scanning section pointing to SECURITY.md for the
+  inventory, required secrets, and manual activations so agents
+  discover the stack from the repository guidance file.

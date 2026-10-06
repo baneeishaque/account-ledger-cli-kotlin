@@ -1,0 +1,5 @@
+chore: ignore scratch directory
+
+- Keep session-scoped scratch artifacts out of version control.
+- The scratch tree holds commit previews and command output captured
+  during agent sessions.

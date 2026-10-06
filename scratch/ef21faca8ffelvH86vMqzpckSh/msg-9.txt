@@ -1,0 +1,6 @@
+ci(security): add zizmor GitHub Actions audit workflow
+
+- Audit every workflow file for supply chain and security weaknesses
+  with the auditor persona and online audits enabled.
+- Publish findings to code scanning through the advanced security
+  integration.

@@ -1,0 +1,6 @@
+ci(security): add Trivy vulnerability and secret scanning workflow
+
+- Scan the filesystem for vulnerabilities, secrets, misconfiguration,
+  and license issues with the pinned Trivy action.
+- Publish SARIF results to code scanning and retain a CycloneDX SBOM
+  artifact for supply chain review.

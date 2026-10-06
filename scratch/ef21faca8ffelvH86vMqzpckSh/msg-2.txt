@@ -1,0 +1,9 @@
+ci(security): add CodeQL code scanning workflow
+
+- Run the security-extended and security-and-quality query suites for
+  Java/Kotlin on pushes, pull requests, and a weekly schedule.
+- Build the cli-app classes with the Gradle wrapper on Temurin 21, the
+  compatibility level declared by the build, so extraction sees
+  compiled sources.
+- Keep the advanced workflow as the only CodeQL setup; default setup
+  stays disabled to avoid conflicting analyses.

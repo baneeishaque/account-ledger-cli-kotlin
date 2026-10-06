@@ -1,0 +1,91 @@
+diff --git a/.github/workflows/gradle-build.yml b/.github/workflows/gradle-build.yml
+index c21470c..1339e5d 100644
+--- a/.github/workflows/gradle-build.yml
++++ b/.github/workflows/gradle-build.yml
+@@ -32,7 +32,7 @@ jobs:
+           fail_level: error
+ 
+   build:
+-    name: 'Premium Gradle Build (JDK 21)'
++    name: 'Premium Gradle Build (JDK 27)'
+     needs: lint
+     runs-on: ubuntu-24.04
+ 
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 7a4703d..8e25c32 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -5,3 +5,15 @@ plugins {
+     alias(libs.plugins.kotlin.serialization) apply false
+     alias(libs.plugins.androidLibrary) apply false
+ }
++
++subprojects {
++
++    plugins.withId("java") {
++
++        extensions.configure<JavaPluginExtension> {
++
++            sourceCompatibility = JavaVersion.VERSION_21
++            targetCompatibility = JavaVersion.VERSION_21
++        }
++    }
++}
+diff --git a/gradle.properties b/gradle.properties
+index 32d25f7..dab7903 100644
+--- a/gradle.properties
++++ b/gradle.properties
+@@ -4,3 +4,5 @@ org.gradle.jvmargs=-Xmx1152M
+ kotlin.compiler.preciseCompilationResultsBackup=true
+ kotlin.build.report.output=file
+ kotlin.daemon.useFallbackStrategy=false
++android.builtInKotlin=false
++android.newDsl=false
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+index 1ebc0f7..af04214 100644
+--- a/gradle/libs.versions.toml
++++ b/gradle/libs.versions.toml
+@@ -1,7 +1,7 @@
+ [versions]
+ kotlin = "2.4.20-tethys-25"
+ ktor = "3.6.0-typed-auth-dsl-eap-1641"
+-agp = "8.13.2"
++agp = "9.4.1"
+ jline = "3.30.17"
+ 
+ [libraries]
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+index 70fe02a..987ddc8 100644
+--- a/gradle/wrapper/gradle-wrapper.properties
++++ b/gradle/wrapper/gradle-wrapper.properties
+@@ -1,6 +1,6 @@
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.5-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-9.8.0-all.zip
+ networkTimeout=10000
+ validateDistributionUrl=true
+ zipStoreBase=GRADLE_USER_HOME
+diff --git a/mise.toml b/mise.toml
+index a72d1c6..10434a4 100644
+--- a/mise.toml
++++ b/mise.toml
+@@ -1,2 +1,2 @@
+ [tools]
+-java = "27.0.0"
++java = "27"
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index c4b8870..3d92b40 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -3,8 +3,10 @@ rootProject.name = "Account-Ledger-Cli-Kotlin"
+ include(":cli-app")
+ include(":account-ledger-lib:account-ledger-lib")
+ include("common-lib:common-lib")
++project(":common-lib").projectDir.mkdirs()
+ project(":common-lib:common-lib").projectDir = file("account-ledger-lib/common-lib/common-lib")
+ include("account-ledger-lib-multi-platform:lib")
++project(":account-ledger-lib-multi-platform").projectDir.mkdirs()
+ project(":account-ledger-lib-multi-platform:lib").projectDir =
+     file("account-ledger-lib/account-ledger-lib-multi-platform/lib")
+ 

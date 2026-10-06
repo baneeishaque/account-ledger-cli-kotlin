@@ -1,0 +1,84 @@
+
+===== pre-state =====
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? .coderabbit.yaml
+?? .github/workflows/pr-agent.yml
+?? .github/workflows/sonarcloud.yml
+?? .github/workflows/static-analysis.yml
+?? SECURITY.md
+?? socket.yml
+?? sonar-project.properties
+211774c136eb9ce3c9493c1a29b3861845c34774
+stash@{0}: On master: safety: pre-batch-1 commit sequence
+
+===== commit 11 =====
+[master 03d710b] ci(security): add SonarCloud analysis workflow and configuration
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 2 files changed, 84 insertions(+)
+ create mode 100644 .github/workflows/sonarcloud.yml
+ create mode 100644 sonar-project.properties
+VERIFY commit 11: OK [.github/workflows/sonarcloud.yml sonar-project.properties ]
+
+===== commit 12 =====
+[master 1c88d01] ci(security): add repository-wide ShellCheck and Hadolint workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 48 insertions(+)
+ create mode 100644 .github/workflows/static-analysis.yml
+VERIFY commit 12: OK [.github/workflows/static-analysis.yml ]
+
+===== commit 13 =====
+[master 509fd2c] ci(ai): add PR-Agent review workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 34 insertions(+)
+ create mode 100644 .github/workflows/pr-agent.yml
+VERIFY commit 13: OK [.github/workflows/pr-agent.yml ]
+
+===== commit 14 =====
+[master 159b006] chore(coderabbit): add CodeRabbit review configuration
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 58 insertions(+)
+ create mode 100644 .coderabbit.yaml
+VERIFY commit 14: OK [.coderabbit.yaml ]
+
+===== commit 15 =====
+[master a030e2b] chore(socket): add Socket.dev supply chain configuration
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 24 insertions(+)
+ create mode 100644 socket.yml
+VERIFY commit 15: OK [socket.yml ]
+
+===== post-state =====
+a030e2b chore(socket): add Socket.dev supply chain configuration
+159b006 chore(coderabbit): add CodeRabbit review configuration
+509fd2c ci(ai): add PR-Agent review workflow
+1c88d01 ci(security): add repository-wide ShellCheck and Hadolint workflow
+03d710b ci(security): add SonarCloud analysis workflow and configuration
+211774c ci(security): add Snyk Code and open source scanning workflow
+cffb06c ci(security): add zizmor GitHub Actions audit workflow
+74fb853 ci(security): add dependency review workflow
+e22e9ed ci(security): add OpenSSF Scorecard workflow
+8c0aaf0 ci(security): add Gitleaks secret scanning workflow
+2c940fe ci(security): add Checkov and KICS IaC scanning workflows
+bf46fb4 ci(security): add Trivy vulnerability and secret scanning workflow
+565aac6 ci(security): add Semgrep OSS scanning workflow
+01c5d10 ci(security): add CodeQL code scanning workflow
+daeab28 chore: ignore scratch directory
+24021eb format code
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? SECURITY.md
+
+BATCH-3-EXECUTION-COMPLETE

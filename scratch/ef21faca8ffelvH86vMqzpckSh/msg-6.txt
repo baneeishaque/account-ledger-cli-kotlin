@@ -1,0 +1,5 @@
+ci(security): add Gitleaks secret scanning workflow
+
+- Scan full history on pushes, pull requests, and a weekly schedule.
+- The action runs without a license key for personal accounts and
+  complements native secret scanning push protection.

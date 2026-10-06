@@ -1,0 +1,7 @@
+ci(security): add SonarCloud analysis workflow and configuration
+
+- Analyze cli-app with JaCoCo coverage and publish to the
+  baneeishaque SonarCloud organization.
+- Skip the analysis until a SONAR_TOKEN secret exists; the coupled
+  sonar-project.properties defines the project key, source exclusions,
+  and coverage report path the scanner reads.

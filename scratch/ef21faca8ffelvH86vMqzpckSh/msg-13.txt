@@ -1,0 +1,7 @@
+ci(ai): add PR-Agent review workflow
+
+- Review pull requests and answer commands with PR-Agent through
+  GitHub Models using the workflow GITHUB_TOKEN and the models read
+  permission, so no API key secret is required.
+- Skip bot senders and keep the job advisory while the model endpoint
+  integration proves stable.

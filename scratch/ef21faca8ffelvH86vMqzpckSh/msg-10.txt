@@ -1,0 +1,6 @@
+ci(security): add Snyk Code and open source scanning workflow
+
+- Run Snyk Code and Snyk Open Source with SARIF output for code
+  scanning.
+- Skip both scans until a SNYK_TOKEN secret exists so the workflow is
+  safe to merge before the free account is connected.

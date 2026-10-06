@@ -1,0 +1,6 @@
+chore(socket): add Socket.dev supply chain configuration
+
+- Register the Gradle manifests as trigger paths and ignore build
+  output directories.
+- Enable pull request alerts and dependency overview reports for the
+  free open source plan.

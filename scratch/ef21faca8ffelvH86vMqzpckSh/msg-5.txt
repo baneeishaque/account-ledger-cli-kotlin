@@ -1,0 +1,6 @@
+ci(security): add Checkov and KICS IaC scanning workflows
+
+- Analyze Dockerfiles, workflow files, and devcontainer configuration
+  for infrastructure-as-code weaknesses with Checkov and KICS.
+- Keep both jobs advisory and publish SARIF results under distinct
+  code scanning categories.

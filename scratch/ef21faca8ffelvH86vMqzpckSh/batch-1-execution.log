@@ -1,0 +1,93 @@
+
+===== pre-state =====
+ M .github/workflows/gradle-build.yml
+ M .gitignore
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? .coderabbit.yaml
+?? .github/workflows/codeql.yml
+?? .github/workflows/dependency-review.yml
+?? .github/workflows/gitleaks.yml
+?? .github/workflows/iac-security.yml
+?? .github/workflows/pr-agent.yml
+?? .github/workflows/scorecard.yml
+?? .github/workflows/semgrep.yml
+?? .github/workflows/snyk.yml
+?? .github/workflows/sonarcloud.yml
+?? .github/workflows/static-analysis.yml
+?? .github/workflows/trivy.yml
+?? .github/workflows/zizmor.yml
+?? SECURITY.md
+?? socket.yml
+?? sonar-project.properties
+24021ebc8de6af7db237efcc27b002a8bace689b
+stash@{0}: On master: safety: pre-batch-1 commit sequence
+
+===== commit 1 =====
+[master daeab28] chore: ignore scratch directory
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 1 insertion(+)
+VERIFY commit 1: OK [.gitignore ]
+
+===== commit 2 =====
+[master 01c5d10] ci(security): add CodeQL code scanning workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 64 insertions(+)
+ create mode 100644 .github/workflows/codeql.yml
+VERIFY commit 2: OK [.github/workflows/codeql.yml ]
+
+===== commit 3 =====
+[master 565aac6] ci(security): add Semgrep OSS scanning workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 50 insertions(+)
+ create mode 100644 .github/workflows/semgrep.yml
+VERIFY commit 3: OK [.github/workflows/semgrep.yml ]
+
+===== commit 4 =====
+[master bf46fb4] ci(security): add Trivy vulnerability and secret scanning workflow
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 69 insertions(+)
+ create mode 100644 .github/workflows/trivy.yml
+VERIFY commit 4: OK [.github/workflows/trivy.yml ]
+
+===== commit 5 =====
+[master 2c940fe] ci(security): add Checkov and KICS IaC scanning workflows
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 79 insertions(+)
+ create mode 100644 .github/workflows/iac-security.yml
+VERIFY commit 5: OK [.github/workflows/iac-security.yml ]
+
+===== post-state =====
+2c940fe ci(security): add Checkov and KICS IaC scanning workflows
+bf46fb4 ci(security): add Trivy vulnerability and secret scanning workflow
+565aac6 ci(security): add Semgrep OSS scanning workflow
+01c5d10 ci(security): add CodeQL code scanning workflow
+daeab28 chore: ignore scratch directory
+24021eb format code
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? .coderabbit.yaml
+?? .github/workflows/dependency-review.yml
+?? .github/workflows/gitleaks.yml
+?? .github/workflows/pr-agent.yml
+?? .github/workflows/scorecard.yml
+?? .github/workflows/snyk.yml
+?? .github/workflows/sonarcloud.yml
+?? .github/workflows/static-analysis.yml
+?? .github/workflows/zizmor.yml
+?? SECURITY.md
+?? socket.yml
+?? sonar-project.properties
+
+BATCH-1-EXECUTION-COMPLETE

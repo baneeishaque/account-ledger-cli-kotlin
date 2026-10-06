@@ -1,0 +1,6 @@
+ci(security): add OpenSSF Scorecard workflow
+
+- Analyze repository security practices on branch protection changes,
+  pushes, and a weekly schedule.
+- Publish the public score and upload SARIF results with the OIDC and
+  security-events permissions the action requires.

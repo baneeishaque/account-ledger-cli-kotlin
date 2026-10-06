@@ -1,0 +1,7 @@
+chore(coderabbit): add CodeRabbit review configuration
+
+- Enable free CodeRabbit reviews for master with the assertive profile
+  and incremental reviews on updates.
+- Turn on the bundled actionlint, checkov, detekt, gitleaks, hadolint,
+  osvScanner, semgrep, shellcheck, trivy, zizmor, and github-checks
+  tools so hosted reviews match the CI scanners.

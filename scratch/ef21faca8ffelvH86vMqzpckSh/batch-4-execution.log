@@ -1,0 +1,146 @@
+
+===== pre-state =====
+ M .github/workflows/gradle-build.yml
+ M GEMINI.md
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+?? SECURITY.md
+a030e2bacb7da5c5c0c623f813082aa9cae1d878
+stash@{0}: On master: safety: pre-batch-1 commit sequence
+
+===== commit 16: stage GEMINI.md with the Security Scanning block excluded =====
+/workspaces/ai-suite/.agents/skills/git-hunk-staging-primitives/scripts/stage-file-excluding-lines.py:54: SyntaxWarning: invalid escape sequence '\|'
+  --exclude-regex '\| \[`baz`\]'
+file:       GEMINI.md
+original:   56 lines
+excluded:   3 lines
+  L54: ## Security Scanning
+  L55: 
+  L56: A layered, zero-cost security stack runs in GitHub Actions: CodeQL (Java/Kotlin), Semgrep OSS, Trivy, Checkov, KICS, Gitleaks, Dependency Review, OpenSSF Scorecard, zizmor, repository-wide ShellCheck, Hadolint, and PR-Agent (AI review via GitHub Models). Snyk and SonarCloud run when their repository secrets are configured. See [SECURITY.md](SECURITY.md) for the inventory, required secrets, and manual app activations.
+staged:     53 lines
+staged blob: c0f3408f41919658dc64744d6afc666bcf7eddc3
+OK: GEMINI.md staged with 3 line(s) deferred (working tree unchanged).
+staging rc=0
+
+-- staged diff (what commit 16 will contain) --
+diff --git a/GEMINI.md b/GEMINI.md
+index b7d8af7..c0f3408 100644
+--- a/GEMINI.md
++++ b/GEMINI.md
+@@ -49,4 +49,5 @@ native-image --static --no-fallback --allow-incomplete-classpath -H:+AddAllChars
+ -   **Build System:** The project uses Gradle for dependency management and build automation. Key build configuration is located in the `build.gradle.kts` files within the root and module directories.
+ -   **Testing:** The project is set up with Jacoco for test coverage reporting. Tests can be run as part of the standard build process.
+ -   **Dependencies:** The project uses `libs.versions.toml` in the `gradle` directory to manage dependency versions centrally.
+--   **CI/CD:** The presence of `.github/workflows/gradle.yml`, `.travis.yml`, and `azure-pipelines-ubuntu.yml` indicates that Continuous Integration is set up on multiple platforms.
++-   **CI/CD:** Continuous Integration is configured in `.github/workflows/gradle-build.yml` (actionlint, ShellCheck, Gradle build), `.travis.yml`, and `azure-pipelines-ubuntu.yml`.
++
+
+-- working-tree diff (block must remain unstaged) --
+diff --git a/GEMINI.md b/GEMINI.md
+index c0f3408..3656c8d 100644
+--- a/GEMINI.md
++++ b/GEMINI.md
+@@ -51,3 +51,6 @@ native-image --static --no-fallback --allow-incomplete-classpath -H:+AddAllChars
+ -   **Dependencies:** The project uses `libs.versions.toml` in the `gradle` directory to manage dependency versions centrally.
+ -   **CI/CD:** Continuous Integration is configured in `.github/workflows/gradle-build.yml` (actionlint, ShellCheck, Gradle build), `.travis.yml`, and `azure-pipelines-ubuntu.yml`.
+ 
++## Security Scanning
++
++A layered, zero-cost security stack runs in GitHub Actions: CodeQL (Java/Kotlin), Semgrep OSS, Trivy, Checkov, KICS, Gitleaks, Dependency Review, OpenSSF Scorecard, zizmor, repository-wide ShellCheck, Hadolint, and PR-Agent (AI review via GitHub Models). Snyk and SonarCloud run when their repository secrets are configured. See [SECURITY.md](SECURITY.md) for the inventory, required secrets, and manual app activations.
+[master 77ec632] docs: correct stale CI workflow reference in GEMINI.md
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+VERIFY commit 16: OK [GEMINI.md ]
+
+===== commit 17 =====
+[master 6e29799] docs(security): add security scanning documentation
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 63 insertions(+)
+ create mode 100644 SECURITY.md
+VERIFY commit 17: OK [SECURITY.md ]
+
+===== commit 18 =====
+[master f2f9084] docs(security): document security scanning stack in GEMINI.md
+ Author: Banee Ishaque K <Baneeishaque@gmail.com>
+ 1 file changed, 3 insertions(+)
+VERIFY commit 18: OK [GEMINI.md ]
+
+===== post-state =====
+f2f9084 docs(security): document security scanning stack in GEMINI.md
+6e29799 docs(security): add security scanning documentation
+77ec632 docs: correct stale CI workflow reference in GEMINI.md
+a030e2b chore(socket): add Socket.dev supply chain configuration
+159b006 chore(coderabbit): add CodeRabbit review configuration
+509fd2c ci(ai): add PR-Agent review workflow
+1c88d01 ci(security): add repository-wide ShellCheck and Hadolint workflow
+03d710b ci(security): add SonarCloud analysis workflow and configuration
+211774c ci(security): add Snyk Code and open source scanning workflow
+cffb06c ci(security): add zizmor GitHub Actions audit workflow
+74fb853 ci(security): add dependency review workflow
+e22e9ed ci(security): add OpenSSF Scorecard workflow
+8c0aaf0 ci(security): add Gitleaks secret scanning workflow
+2c940fe ci(security): add Checkov and KICS IaC scanning workflows
+bf46fb4 ci(security): add Trivy vulnerability and secret scanning workflow
+565aac6 ci(security): add Semgrep OSS scanning workflow
+01c5d10 ci(security): add CodeQL code scanning workflow
+daeab28 chore: ignore scratch directory
+24021eb format code
+68e7949 bat
+d3f49aa toml extension
+ M .github/workflows/gradle-build.yml
+ M build.gradle.kts
+ M gradle.properties
+ M gradle/libs.versions.toml
+ M gradle/wrapper/gradle-wrapper.properties
+ M mise.toml
+ M settings.gradle.kts
+
+-- final GEMINI.md commit diff --
+f2f9084 docs(security): document security scanning stack in GEMINI.md
+
+diff --git a/GEMINI.md b/GEMINI.md
+index c0f3408..3656c8d 100644
+--- a/GEMINI.md
++++ b/GEMINI.md
+@@ -51,3 +51,6 @@ native-image --static --no-fallback --allow-incomplete-classpath -H:+AddAllChars
+ -   **Dependencies:** The project uses `libs.versions.toml` in the `gradle` directory to manage dependency versions centrally.
+ -   **CI/CD:** Continuous Integration is configured in `.github/workflows/gradle-build.yml` (actionlint, ShellCheck, Gradle build), `.travis.yml`, and `azure-pipelines-ubuntu.yml`.
+ 
++## Security Scanning
++
++A layered, zero-cost security stack runs in GitHub Actions: CodeQL (Java/Kotlin), Semgrep OSS, Trivy, Checkov, KICS, Gitleaks, Dependency Review, OpenSSF Scorecard, zizmor, repository-wide ShellCheck, Hadolint, and PR-Agent (AI review via GitHub Models). Snyk and SonarCloud run when their repository secrets are configured. See [SECURITY.md](SECURITY.md) for the inventory, required secrets, and manual app activations.
+
+===== safety-stash no-op verification =====
+-- tracked files in stash (stash blob vs HEAD blob vs working-tree blob) --
+.github/workflows/gradle-build.yml stash=1339e5d1ed5276cfc2b0af6aeb78cfee37ea1348 head=c21470c1ecc86efe07652af0d078c9575f076675 work=1339e5d1ed5276cfc2b0af6aeb78cfee37ea1348
+.gitignore stash=19652a6a161a914fa4019c45b71e88a27de9f54c head=19652a6a161a914fa4019c45b71e88a27de9f54c work=19652a6a161a914fa4019c45b71e88a27de9f54c
+GEMINI.md stash=3656c8d55810e3939ae7c24f08c57371140feb5d head=3656c8d55810e3939ae7c24f08c57371140feb5d work=3656c8d55810e3939ae7c24f08c57371140feb5d
+build.gradle.kts stash=8e25c329fbde97cd56cc41800bcc4f5242592ca0 head=7a4703d43a30784a9a1f90e5e873dcf9ca062594 work=8e25c329fbde97cd56cc41800bcc4f5242592ca0
+gradle.properties stash=dab79035da9ca2978cd9033ec095e93318b681bc head=32d25f7d27c00d341845033737c111eb0beff30c work=dab79035da9ca2978cd9033ec095e93318b681bc
+gradle/libs.versions.toml stash=af0421425507f234e0eaa6b32346244982dc72a0 head=1ebc0f727e4c50aaf149c6072d6efae0a3b98d72 work=af0421425507f234e0eaa6b32346244982dc72a0
+gradle/wrapper/gradle-wrapper.properties stash=987ddc8e4d3649294604efed5b1d7b4648d255ab head=70fe02a5369234eccf160f6add7b2c95abf26cc2 work=987ddc8e4d3649294604efed5b1d7b4648d255ab
+mise.toml stash=10434a4185af061c7b2c3f5dfb16f39f1311ea3a head=a72d1c6692834d5f954e4b2318c740007e242e4a work=10434a4185af061c7b2c3f5dfb16f39f1311ea3a
+settings.gradle.kts stash=3d92b402597ff549584d68e29e2a3af2578306c4 head=c4b887005bc2e1c74afc2c43a5e387c8dff076e9 work=3d92b402597ff549584d68e29e2a3af2578306c4
+-- untracked files in stash (stash blob vs HEAD blob) --
+.coderabbit.yaml stash=ad947d3b2c66e59b0ae40a03670724b08095454e head=ad947d3b2c66e59b0ae40a03670724b08095454e
+.github/workflows/codeql.yml stash=8ad29f7b68195ccd377065f46da494e1d36ec527 head=8ad29f7b68195ccd377065f46da494e1d36ec527
+.github/workflows/dependency-review.yml stash=9920dec7ae4aa1076b487506ac66e7c6579fd419 head=9920dec7ae4aa1076b487506ac66e7c6579fd419
+.github/workflows/gitleaks.yml stash=750ea08aca76b259203588b330ddafbfff390e1b head=750ea08aca76b259203588b330ddafbfff390e1b
+.github/workflows/iac-security.yml stash=b26a2f3ac1b7426be439d4e8ba93a53a9a9d8f8c head=b26a2f3ac1b7426be439d4e8ba93a53a9a9d8f8c
+.github/workflows/pr-agent.yml stash=a17eb10925e0050eb81878da30e327ce16bc1723 head=a17eb10925e0050eb81878da30e327ce16bc1723
+.github/workflows/scorecard.yml stash=ea5a0c5abdc03a00f1b857213164af81e32eafab head=ea5a0c5abdc03a00f1b857213164af81e32eafab
+.github/workflows/semgrep.yml stash=a5bd80c9fcd24548a92adb1d531e1c5f774d8844 head=a5bd80c9fcd24548a92adb1d531e1c5f774d8844
+.github/workflows/snyk.yml stash=6df52d3e7374aeb120ed95bf00d647a4ef10e457 head=6df52d3e7374aeb120ed95bf00d647a4ef10e457
+.github/workflows/sonarcloud.yml stash=d2493f851292835de462579ce034ed1c72c4b72f head=d2493f851292835de462579ce034ed1c72c4b72f
+.github/workflows/static-analysis.yml stash=1507be94bcb5ba5c3ac1b5bac512ed8331dd9560 head=1507be94bcb5ba5c3ac1b5bac512ed8331dd9560
+.github/workflows/trivy.yml stash=e859acaa39d8e1cb8d58e9883ec9f5b28605fc7f head=e859acaa39d8e1cb8d58e9883ec9f5b28605fc7f
+.github/workflows/zizmor.yml stash=939aa7f842dda1d23964f20a4c19852563d58d54 head=939aa7f842dda1d23964f20a4c19852563d58d54
+SECURITY.md stash=519e98d332f5b4f8d7ec33270a064663d5da72f3 head=519e98d332f5b4f8d7ec33270a064663d5da72f3
+socket.yml stash=dd24cc3c4ad97b67d3af1458808d0a61dd0ece56 head=dd24cc3c4ad97b67d3af1458808d0a61dd0ece56
+sonar-project.properties stash=31ef98c4bc35ec8a59ba6226eb9d29ed1f02c8f9 head=31ef98c4bc35ec8a59ba6226eb9d29ed1f02c8f9
+
+BATCH-4-EXECUTION-COMPLETE

@@ -1,0 +1,5 @@
+docs: correct stale CI workflow reference in GEMINI.md
+
+- Point the CI/CD note at .github/workflows/gradle-build.yml, which
+  runs actionlint, ShellCheck, and the Gradle build, instead of the
+  removed gradle.yml path.
