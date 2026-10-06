@@ -121,10 +121,12 @@
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/SrzStephen/devcontainer-features/act:1": {},
 
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
 		// "ghcr.io/bartventer/arch-devcontainer-features/docker-outside-of-docker:1": {}
 		//  "ghcr.io/devcontainers/features/docker-in-docker:4": {}
 		// "ghcr.io/bartventer/arch-devcontainer-features/docker-in-docker:1": {}
+
+		"ghcr.io/devcontainer-community/devcontainer-features/bat:1": {}
 	},
 	"image": "mcr.microsoft.com/devcontainers/base:3.0.8-ubuntu26.04",
 	"postCreateCommand": "mise trust --yes && mise install"
