@@ -233,3 +233,4 @@ cli-app/bin/
 .kotlin/
 
 /Account-Ledger-Cli/
+scratch/
