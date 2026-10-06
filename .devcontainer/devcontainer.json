@@ -72,11 +72,12 @@
 				"vscode.log",
 				"vscode.markdown",
 				"vscode.markdown-language-features",
-				"vscode.mermaid-markdown-features"
+				"vscode.mermaid-markdown-features",
 				// "github.vscode-pull-request-github",
 				// "ms-vscode-remote.remote-containers",
 				// "ms-azuretools.vscode-containers",
 				// "nick-rudenko.back-n-forth",
+				"tamasfe.even-better-toml"
 			]
 		}
 	},
