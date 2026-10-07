@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.21-433"
+kotlin = "2.5.0-saturn-677"
 ktor = "3.6.0"
 agp = "9.4.1"
 jline = "4.4.7"
