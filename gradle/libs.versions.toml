@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.4.20-tethys-25"
+kotlin = "2.4.21-433"
 ktor = "3.6.0"
 agp = "9.4.1"
 jline = "4.4.7"
