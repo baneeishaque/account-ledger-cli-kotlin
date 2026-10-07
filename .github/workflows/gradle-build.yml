@@ -44,7 +44,7 @@ jobs:
           fetch-depth: 1
 
       - name: Set up tools with mise
-        uses: Baneeishaque/mise-setup-verification-action@bca6635be4dd23f8b7d4a408b8f4ee33fbfb1343
+        uses: Baneeishaque/mise-setup-verification-action@175e4f25fa784f3130eb4aef6c2e32b74c11eaea
         with:
           mise_version: '2025.12.9'
           working_directory: '.'
