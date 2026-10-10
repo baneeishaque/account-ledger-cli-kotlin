@@ -128,6 +128,6 @@
 
 		"ghcr.io/devcontainer-community/devcontainer-features/bat:1": {}
 	},
-	"image": "mcr.microsoft.com/devcontainers/base:3.0.8-ubuntu26.04",
+	"image": "mcr.microsoft.com/devcontainers/base:3.0.10-ubuntu26.04",
 	"postCreateCommand": "mise trust --yes && mise install"
 }
