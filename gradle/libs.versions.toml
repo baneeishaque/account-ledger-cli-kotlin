@@ -2,7 +2,7 @@
 kotlin = "2.4.21-433"
 ktor = "3.6.0"
 agp = "9.4.1"
-jline = "4.4.7"
+jline = "4.4.8"
 
 [libraries]
 kotlinx-cli = { module = "org.jetbrains.kotlinx:kotlinx-cli", version = "0.3.6" }
