@@ -27,7 +27,7 @@ jobs:
           scandir: './.github/scripts'
 
       - name: 'Run Actionlint'
-        uses: reviewdog/action-actionlint@1758727be30241166609dad4c97588b6ad411f32 # v1
+        uses: reviewdog/action-actionlint@b76d06f8570118465db3190c9a08f1b29d341aa1 # v1
         with:
           fail_level: error
 
