@@ -24,7 +24,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Run PR-Agent
-        uses: The-PR-Agent/pr-agent@8e5a9295973b24af4b70cafd0b660a230811ef9e # v0.47.0
+        uses: The-PR-Agent/pr-agent@981344be2755e303df501e18e3f60b848a188a80 # v0.48.0
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
