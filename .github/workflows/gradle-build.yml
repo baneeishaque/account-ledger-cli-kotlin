@@ -27,7 +27,7 @@ jobs:
           scandir: './.github/scripts'
 
       - name: 'Run Actionlint'
-        uses: reviewdog/action-actionlint@1758727be30241166609dad4c97588b6ad411f32 # v1
+        uses: reviewdog/action-actionlint@a7d35aaf8c309203a4ae861d32b7bd490baa7bf3 # v1
         with:
           fail_level: error
 
@@ -59,7 +59,7 @@ jobs:
         shell: bash
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6
+        uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6
         with:
           gradle-version: 'wrapper'
           cache-cleanup: 'on-success'
